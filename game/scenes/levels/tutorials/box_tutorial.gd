@@ -3,9 +3,9 @@ extends CanvasLayer
 @export var message_timer : Timer
 @export var message_time : float
 @export var player : Player
-@export var first_box : MovableSquare
-@export var second_box : MovableSquare
-@export var third_box : MovableSquare
+@export var first_box : CharacterBody2D
+@export var second_box : CharacterBody2D
+@export var third_box : CharacterBody2D
 @export var text : Label
 
 

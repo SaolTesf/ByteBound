@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://biddtthbbkyfa"]
 
-[ext_resource type="Script" uid="uid://bw2pv1awjtcs7" path="res://entites/objects/key/key_body.gd" id="1_p7i6w"]
 [ext_resource type="Texture2D" uid="uid://dqmdkvic37urm" path="res://Assets/Objects/KeyCard.png" id="2_f65xj"]
 [ext_resource type="Script" path="res://components/movement/gravity_component.gd" id="3_chiga"]
 [ext_resource type="PackedScene" uid="uid://t4ij3l5v76t" path="res://components/hit-box/hit_box.tscn" id="4_hl6ni"]
+[ext_resource type="Script" path="res://components/locomotion/locomotion_component.gd" id="5_loco"]
+[ext_resource type="Script" path="res://components/collectible/collectible_component.gd" id="6_coll"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qbgmn"]
 size = Vector2(28, 16)
@@ -11,12 +12,10 @@ size = Vector2(28, 16)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7c310"]
 polygon = PackedVector2Array(-13, -7, -12, -7, -12, -8, 12, -8, 12, -7, 13, -7, 13, 7, 12, 7, 12, 8, -12, 8, -12, 7, -13, 7)
 
-[node name="KeyBody" type="CharacterBody2D" node_paths=PackedStringArray("grav_comp")]
+[node name="KeyBody" type="CharacterBody2D"]
 position = Vector2(-1, 0)
 collision_layer = 128
 collision_mask = 3
-script = ExtResource("1_p7i6w")
-grav_comp = NodePath("GravityComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_f65xj")
@@ -25,7 +24,10 @@ texture = ExtResource("2_f65xj")
 shape = SubResource("RectangleShape2D_qbgmn")
 debug_color = Color(0.95171, 0.185773, 0.310269, 0.42)
 
-[node name="GravityComponent" type="Node" parent="."]
+[node name="Locomotion" type="Node" parent="."]
+script = ExtResource("5_loco")
+
+[node name="Gravity" type="Node" parent="Locomotion"]
 script = ExtResource("3_chiga")
 
 [node name="HitBox" parent="." instance=ExtResource("4_hl6ni")]
@@ -33,6 +35,11 @@ collision_layer = 128
 collision_mask = 3
 x = 32.0
 y = 18.0
+
+[node name="CollectibleComponent" type="Node" parent="." node_paths=PackedStringArray("owner_body", "hitbox")]
+script = ExtResource("6_coll")
+owner_body = NodePath("..")
+hitbox = NodePath("../HitBox")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_7c310")
