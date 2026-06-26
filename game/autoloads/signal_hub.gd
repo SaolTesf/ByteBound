@@ -14,9 +14,9 @@ signal movable_box_hit(box: CharacterBody2D)
 
 #region Buttons -> Lasers
 ## A pedestal of [param channel] was permanently activated.
-signal pedestal_activated(channel: Globals.Channel)
+signal pedestal_activated(channel: Channel.Type)
 ## A pressure plate of [param channel] became active (something is on it).
-signal pressure_plate_activated(channel: Globals.Channel)
+signal pressure_plate_activated(channel: Channel.Type)
 ## A pressure plate of [param channel] became inactive (stepped off).
-signal pressure_plate_deactivated(channel: Globals.Channel)
+signal pressure_plate_deactivated(channel: Channel.Type)
 #endregion

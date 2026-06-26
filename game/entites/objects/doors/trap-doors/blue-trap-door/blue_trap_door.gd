@@ -27,8 +27,8 @@ func _ready():
 	SignalHub.pressure_plate_deactivated.connect(_on_pressure_plate_deactivated)
 
 
-func _on_pressure_plate_activated(channel: Globals.Channel) -> void:
-	if channel != Globals.Channel.BLUE:
+func _on_pressure_plate_activated(channel: Channel.Type) -> void:
+	if channel != Channel.Type.BLUE:
 		return
 	if not is_open and not is_transitioning:
 		is_transitioning = true
@@ -36,8 +36,8 @@ func _on_pressure_plate_activated(channel: Globals.Channel) -> void:
 		# Cancel any pending close
 		door_timer.stop()
 
-func _on_pressure_plate_deactivated(channel: Globals.Channel) -> void:
-	if channel != Globals.Channel.BLUE:
+func _on_pressure_plate_deactivated(channel: Channel.Type) -> void:
+	if channel != Channel.Type.BLUE:
 		return
 	door_timer.start(1)
 

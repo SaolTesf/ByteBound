@@ -23,7 +23,6 @@ config/icon="res://Assets/icon.svg"
 
 SignalHub="*res://autoloads/signal_hub.gd"
 SceneManager="*res://autoloads/scene_manager.gd"
-Globals="*res://autoloads/globals.gd"
 Debug="*res://autoloads/debug.gd"
 AudioController="*res://autoloads/audio_controller.tscn"
 

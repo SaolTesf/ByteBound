@@ -6,7 +6,7 @@ class_name Laser extends Area2D
 ## plate opens it only while held down.
 
 ## The colour channel this laser responds to. Set per scene.
-@export var type: Globals.Channel
+@export var type: Channel.Type
 
 var sprite: AnimatedSprite2D
 var light: PointLight2D
@@ -37,20 +37,20 @@ func _process(_delta: float) -> void:
 	_update_sound()
 
 #region Signal handlers
-func _on_pedestal_activated(channel: Globals.Channel) -> void:
+func _on_pedestal_activated(channel: Channel.Type) -> void:
 	if channel != type:
 		return
 	perma_open = true
 	if is_active:
 		_deactivate()
 
-func _on_pressure_plate_activated(channel: Globals.Channel) -> void:
+func _on_pressure_plate_activated(channel: Channel.Type) -> void:
 	if channel != type:
 		return
 	if is_active and not perma_open:
 		_deactivate()
 
-func _on_pressure_plate_deactivated(channel: Globals.Channel) -> void:
+func _on_pressure_plate_deactivated(channel: Channel.Type) -> void:
 	if channel != type:
 		return
 	if not is_active and not perma_open:

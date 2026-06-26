@@ -6,8 +6,8 @@ var init_activated: bool = false
 func _ready() -> void:
 	SignalHub.pedestal_activated.connect(_on_pedestal_activated)
 
-func _on_pedestal_activated(channel: Globals.Channel) -> void:
-	if channel != Globals.Channel.BLUE:
+func _on_pedestal_activated(channel: Channel.Type) -> void:
+	if channel != Channel.Type.BLUE:
 		return
 	if not init_activated:
 		init_activated = true

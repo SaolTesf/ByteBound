@@ -8,7 +8,7 @@ class_name TriggerButton extends Area2D
 ## "Deactivate". Every button joins the "Buttons" group.
 
 ## The colour channel this button controls. Set per scene.
-@export var type: Globals.Channel
+@export var type: Channel.Type
 @export var light: PointLight2D
 
 var is_activated: bool = false
