@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dwvnryys74wnh"
+path="res://.godot/imported/winter_main loop_Bass.wav-72a237e7ba2a1d9293aa7f8758224869.sample"
+
+[deps]
+
+source_file="res://Audio/True 8-Bit Music/Winter/main loop/winter_main loop_Bass.wav"
+dest_files=["res://.godot/imported/winter_main loop_Bass.wav-72a237e7ba2a1d9293aa7f8758224869.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

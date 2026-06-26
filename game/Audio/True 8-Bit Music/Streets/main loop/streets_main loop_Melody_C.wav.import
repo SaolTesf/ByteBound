@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bd2lk42d0wg7x"
+path="res://.godot/imported/streets_main loop_Melody_C.wav-c5830a6f86b3bf9e160186075dcbdc12.sample"
+
+[deps]
+
+source_file="res://Audio/True 8-Bit Music/Streets/main loop/streets_main loop_Melody_C.wav"
+dest_files=["res://.godot/imported/streets_main loop_Melody_C.wav-c5830a6f86b3bf9e160186075dcbdc12.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

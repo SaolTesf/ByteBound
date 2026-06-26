@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d182hctbo3yrh"
+path="res://.godot/imported/fields_intro_Bass.wav-f9ba6483340251a40f3e705bff7699b7.sample"
+
+[deps]
+
+source_file="res://Audio/True 8-Bit Music/Fields/intro/fields_intro_Bass.wav"
+dest_files=["res://.godot/imported/fields_intro_Bass.wav-f9ba6483340251a40f3e705bff7699b7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

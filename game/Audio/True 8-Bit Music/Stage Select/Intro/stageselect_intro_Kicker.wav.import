@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bsfaikrlcc5g8"
+path="res://.godot/imported/stageselect_intro_Kicker.wav-59fd47379a980487b177f01259d81e0a.sample"
+
+[deps]
+
+source_file="res://Audio/True 8-Bit Music/Stage Select/Intro/stageselect_intro_Kicker.wav"
+dest_files=["res://.godot/imported/stageselect_intro_Kicker.wav-59fd47379a980487b177f01259d81e0a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

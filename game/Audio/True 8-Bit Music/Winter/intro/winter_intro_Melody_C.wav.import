@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d06bh5u4fvgs8"
+path="res://.godot/imported/winter_intro_Melody_C.wav-8ec79f9144626d0aeff0be44b135d805.sample"
+
+[deps]
+
+source_file="res://Audio/True 8-Bit Music/Winter/intro/winter_intro_Melody_C.wav"
+dest_files=["res://.godot/imported/winter_intro_Melody_C.wav-8ec79f9144626d0aeff0be44b135d805.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

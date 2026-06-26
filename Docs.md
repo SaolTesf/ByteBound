@@ -81,15 +81,17 @@ Debug.log(self, "%s: %d %v" % [string, number, vector], false) # complex format 
 
 ## Systems
 ### Scene Manager
-The scene manager changes scenes and tracks active campaign progress. Scene references live in the scene catalog resource.
+The scene manager is a way to load different scenes from an array. 
 
 | Function              | Description                       |
 |-----------------------|-----------------------------------|
-| change_to(scene)      | changes to a packed scene         |
-| start_campaign(...)   | starts a campaign level sequence  |
-| go_to_level(index)    | loads a campaign level by index   |
+| play()                | used to start the game at level 1 |
+| selectLevel(level)    | use to load the specified level   |
 | reload()              | used to reload the current level  |
+| previous()            | used to load the previous level   |
 | next()                | used to load the next level       |
+| open\_level\_select() | opens the level select menu       |
+| open\_main\_menu()    | opens the main menu               |
 
 #### Example
 

@@ -1,0 +1,124 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmbscg208h3f4"]
+
+[ext_resource type="Script" uid="uid://oao7tariy3h3" path="res://UI/Level-Select/Tutorial-Levels/tutorial_levels.gd" id="1_qccxi"]
+[ext_resource type="Theme" uid="uid://cjrb4f2yj7vjw" path="res://UI/MainMenu/MainMenuTheme.tres" id="2_l0jv8"]
+[ext_resource type="LabelSettings" uid="uid://baonky01jfi24" path="res://Font/Label.tres" id="3_wpdij"]
+
+[node name="Tutorial Select" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qccxi")
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0.458824)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+alignment = 1
+
+[node name="TitleContainer" type="MarginContainer" parent="Panel/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_l0jv8")
+
+[node name="Title" type="Label" parent="Panel/HBoxContainer/VBoxContainer/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 45
+text = "Tutorial Levels
+"
+label_settings = ExtResource("3_wpdij")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="ButtonContainer" type="MarginContainer" parent="Panel/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+
+[node name="levelContainer" type="GridContainer" parent="Panel/HBoxContainer/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/h_separation = 48
+theme_override_constants/v_separation = 11
+columns = 3
+
+[node name="Level1" type="Button" parent="Panel/HBoxContainer/VBoxContainer/ButtonContainer/levelContainer"]
+layout_mode = 2
+theme = ExtResource("2_l0jv8")
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 1, 0, 1)
+theme_override_constants/outline_size = 10
+text = "Level 1"
+
+[node name="Level2" type="Button" parent="Panel/HBoxContainer/VBoxContainer/ButtonContainer/levelContainer"]
+layout_mode = 2
+theme = ExtResource("2_l0jv8")
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 1, 1)
+theme_override_constants/outline_size = 10
+text = "Level 2"
+
+[node name="Level3" type="Button" parent="Panel/HBoxContainer/VBoxContainer/ButtonContainer/levelContainer"]
+layout_mode = 2
+theme = ExtResource("2_l0jv8")
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.411765, 0, 0.494118, 1)
+theme_override_constants/outline_size = 10
+text = "Level 3"
+
+[node name="Level4" type="Button" parent="Panel/HBoxContainer/VBoxContainer/ButtonContainer/levelContainer"]
+layout_mode = 2
+theme = ExtResource("2_l0jv8")
+theme_override_colors/font_outline_color = Color(0.6, 0, 0, 1)
+theme_override_constants/outline_size = 10
+text = "Level 4"
+
+[node name="Level5" type="Button" parent="Panel/HBoxContainer/VBoxContainer/ButtonContainer/levelContainer"]
+layout_mode = 2
+theme = ExtResource("2_l0jv8")
+theme_override_colors/font_outline_color = Color(5.77569e-07, 0.357889, 0.371175, 1)
+theme_override_constants/outline_size = 10
+text = "Level 5"
+
+[node name="VBox" type="VBoxContainer" parent="Panel/HBoxContainer/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+alignment = 1
+
+[node name="GoBack" type="Button" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 127.0
+offset_top = 286.0
+offset_right = 513.0
+offset_bottom = 344.0
+theme = ExtResource("2_l0jv8")
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0.775167, 0.29, 1)
+theme_override_constants/outline_size = 10
+text = "Go Back
+"

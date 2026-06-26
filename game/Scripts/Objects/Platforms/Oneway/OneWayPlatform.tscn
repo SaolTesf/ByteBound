@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://36pkp13b1yer"]
+
+[ext_resource type="Texture2D" uid="uid://ckb03ym6abp61" path="res://Assets/Objects/Platforms/OnewayPlatform.png" id="1_r412o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mavlf"]
+size = Vector2(64, 5)
+
+[node name="OneWayPlatform" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_mavlf")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_r412o")
