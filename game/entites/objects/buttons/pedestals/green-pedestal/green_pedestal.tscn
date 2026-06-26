@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://btec7li76t31c"]
 
-[ext_resource type="Script" uid="uid://byxrr0u3acoqs" path="res://entites/objects/buttons/pedestals/green-pedestal/green_pedestal.gd" id="1_43xyo"]
+[ext_resource type="Script" uid="uid://bp33iphp50fkc" path="res://entites/objects/buttons/pedestals/pedestal.gd" id="1_43xyo"]
 [ext_resource type="Texture2D" uid="uid://dhme4u2c1oktt" path="res://Assets/Objects/Buttons/GreenPedistal/GreenPedistal1.png" id="3_sc73s"]
 [ext_resource type="Texture2D" uid="uid://bsjudub3i6pm7" path="res://Assets/Objects/Buttons/GreenPedistal/GreenPedistal2.png" id="4_avkh8"]
 [ext_resource type="Texture2D" uid="uid://bsdn4mj77dqar" path="res://Assets/Objects/Buttons/BluePedistal/BluePedistal3.png" id="5_2p7ky"]
@@ -49,6 +49,7 @@ fill_to = Vector2(0.82906, 0.106838)
 scale = Vector2(1.5, 2)
 collision_mask = 3
 script = ExtResource("1_43xyo")
+type = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nen4n")

@@ -22,19 +22,23 @@ func _ready():
 	add_child(door_timer)
 	door_timer.timeout.connect(_on_door_timer_timeout)
 	
-	# Setup the signal connections
-	SignalHub.blue_pressure_plate_activated.connect(_on_blue_pressure_plate_activated)
-	SignalHub.blue_pressure_plate_deactivated.connect(_on_blue_pressure_plate_deactivated)
-	
-	
-func _on_blue_pressure_plate_activated():
+	# React to blue pressure plates via the shared signal.
+	SignalHub.pressure_plate_activated.connect(_on_pressure_plate_activated)
+	SignalHub.pressure_plate_deactivated.connect(_on_pressure_plate_deactivated)
+
+
+func _on_pressure_plate_activated(channel: Globals.Channel) -> void:
+	if channel != Globals.Channel.BLUE:
+		return
 	if not is_open and not is_transitioning:
 		is_transitioning = true
 		sprite.play("Open")
-		# Cancel any pending close time
+		# Cancel any pending close
 		door_timer.stop()
 
-func _on_blue_pressure_plate_deactivated():
+func _on_pressure_plate_deactivated(channel: Globals.Channel) -> void:
+	if channel != Globals.Channel.BLUE:
+		return
 	door_timer.start(1)
 
 func _on_door_timer_timeout():

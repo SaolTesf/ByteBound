@@ -3,12 +3,13 @@ extends Camera2D
 var init_activated: bool = false
 @onready var player_cam = $"../Characters/Player".camera
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	SignalHub.blue_pedistal_activated.connect(_pan_camera)
-	
-func _pan_camera():
-	if !init_activated:	
+	SignalHub.pedestal_activated.connect(_on_pedestal_activated)
+
+func _on_pedestal_activated(channel: Globals.Channel) -> void:
+	if channel != Globals.Channel.BLUE:
+		return
+	if not init_activated:
 		init_activated = true
 		make_current()
 		await get_tree().create_timer(1.5).timeout

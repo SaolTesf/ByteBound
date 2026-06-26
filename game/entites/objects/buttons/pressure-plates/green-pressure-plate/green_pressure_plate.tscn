@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b4hocxvkrbg3s"]
 
-[ext_resource type="Script" uid="uid://b1tbcuyedhdm3" path="res://entites/objects/buttons/pressure-plates/green-pressure-plate/green_pressure_plate.gd" id="1_s1op5"]
+[ext_resource type="Script" uid="uid://bw4dt1bkc6aj5" path="res://entites/objects/buttons/pressure-plates/pressure_plate.gd" id="1_s1op5"]
 [ext_resource type="Texture2D" uid="uid://b47e3wswv3mkg" path="res://Assets/Objects/Buttons/GreenPressurePlate/GreenPressurePlate3.png" id="2_mh3bu"]
 [ext_resource type="Texture2D" uid="uid://d0k7ksd063j8v" path="res://Assets/Objects/Buttons/GreenPressurePlate/GreenPressurePlate2.png" id="3_vbwya"]
 [ext_resource type="Texture2D" uid="uid://dy1ltab3jslyw" path="res://Assets/Objects/Buttons/GreenPressurePlate/GreenPressurePlate1.png" id="4_njx3d"]
@@ -62,6 +62,7 @@ fill_from = Vector2(0.5, 0.5)
 collision_layer = 16
 collision_mask = 2
 script = ExtResource("1_s1op5")
+type = 1
 light = NodePath("PointLight2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

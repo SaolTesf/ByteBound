@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://da24un2f3vxpg"]
 
-[ext_resource type="Script" uid="uid://cv5v1rd6loa37" path="res://entites/objects/hazards/lazers/green-laser/green_lazer.gd" id="1_2eoge"]
+[ext_resource type="Script" uid="uid://dal1kfytnu5pf" path="res://entites/objects/hazards/lazers/laser.gd" id="1_2eoge"]
 [ext_resource type="Texture2D" uid="uid://b0cj1ib8pslf0" path="res://Assets/Objects/Barriers/GreenBeam/Disabled/GreenBeamDisabled7.png" id="1_i5abx"]
 [ext_resource type="Texture2D" uid="uid://dpjrwqolsgert" path="res://Assets/Objects/Barriers/GreenBeam/Disabled/GreenBeamDisabled6.png" id="2_elpxy"]
 [ext_resource type="Texture2D" uid="uid://c7rc5e81m3xgo" path="res://Assets/Objects/Barriers/GreenBeam/Disabled/GreenBeamDisabled5.png" id="3_od6wv"]
@@ -105,6 +105,7 @@ repeat = 2
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_2eoge")
+type = 1
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

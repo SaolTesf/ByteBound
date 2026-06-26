@@ -1,4 +1,6 @@
 extends Node
+## Project-wide enums shared across systems.
 
-enum ButtonType{RED ,GREEN, BLUE, DEFAULT}
-enum LazerType { RED, GREEN, BLUE, DEFAULT }
+## Colour channel linking a button (pedestal / pressure plate) to the [Laser] it
+## toggles. A button and the laser it controls share the same channel.
+enum Channel { RED, GREEN, BLUE }

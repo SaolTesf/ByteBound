@@ -1,57 +1,36 @@
 class_name PressurePlate extends TriggerButton
-## A pressure plate only deactivates a lazer while there is something on top of it.
+## A pressure plate deactivates its channel's [Laser] only while something rests
+## on it; the laser re-activates when the plate is cleared.
 ##
-## Checks for collisions with different types of objects.
-## This allows for things like the player to turn off a lazer by standing on it or by placing a box on it.
-
-#var plateStepped : AudioStreamPlayer2D
+## Triggered by the player, throwables, or movable boxes.
 
 func _ready() -> void:
 	super._ready()
 	add_to_group("PressurePlates")
-
-	# connect the signal
-	body_exited.connect(_on_body_exited)
 	body_entered.connect(_on_body_entered)
-	
-
-	#plateStepped = get_node("PlatePressed")
+	body_exited.connect(_on_body_exited)
 
 func _on_body_entered(body: Node2D) -> void:
-	Debug.debug(self, "%s Entered the buttons Area2D" % body.name, false)
-	if body.is_in_group("Player") or body.is_in_group("Throwable") or body.is_in_group("Movable"):
-		# Only emit the signal if the button is not already activated
-		# Keeps the signal from emiting more then once per entering.
-		if not is_activated:
-			# Play the transition animation (button being pressed)
-			sprite.play("Activate")
-			light.enabled = false
-			
-			# Set before the signal is emitted
-			# Makes sure that on entering the activated signal is emitted
-			is_activated = true
-
-			# emit the proper signal
-			signal_emiter()
+	Debug.debug(self, "%s entered the pressure plate" % body.name, false)
+	if _is_trigger(body) and not is_activated:
+		sprite.play("Activate")
+		light.enabled = false
+		is_activated = true
+		emit_activation()
 
 func _on_body_exited(body: Node2D) -> void:
-	Debug.debug(self, "%s Left the area of the pressure plate" % body.name, false)
-	if body.is_in_group("Player") or body.is_in_group("Throwable") or body.is_in_group("Movable"):
-		# Play the transition animation (button being pressed)
+	Debug.debug(self, "%s left the pressure plate" % body.name, false)
+	if _is_trigger(body):
 		sprite.play("Deactivate")
-		
-		# set is active to false before the signal is emitted
-		# Makes sure that on leaving the deactivated signal is emitted 
 		is_activated = false
-		signal_emiter()
+		emit_activation()
 
-		
-func signal_emiter() -> void:
-	#plateStepped.play()
+func emit_activation() -> void:
 	AudioController.play_sound("PlateStepped")
+	if is_activated:
+		SignalHub.pressure_plate_activated.emit(type)
+	else:
+		SignalHub.pressure_plate_deactivated.emit(type)
 
-	if type != Globals.ButtonType.DEFAULT and is_activated:
-		SignalHub.emit_pressure_plate_activated(type)
-	
-	if type != Globals.ButtonType.DEFAULT and !is_activated:
-		SignalHub.emit_pressure_plate_deactivated(type)
+func _is_trigger(body: Node2D) -> bool:
+	return body.is_in_group("Player") or body.is_in_group("Throwable") or body.is_in_group("Movable")
