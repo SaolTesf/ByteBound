@@ -38,7 +38,7 @@ func update_sound():
 		AudioController.stop_sound("LaserField")
 		
 func _on_body_entered(body : Node) -> void:
-	Debug.debug(self, "%s Entered the Laser" % body.get_script().get_global_name(), false)
+	Debug.debug(self, "%s Entered the Laser" % body.name, false)
 	if body.is_in_group("Player"):
 		if is_active:
 			#hitSound.play()

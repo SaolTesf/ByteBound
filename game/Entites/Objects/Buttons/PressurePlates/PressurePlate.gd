@@ -35,7 +35,7 @@ func _on_body_entered(body: Node2D) -> void:
 			signal_emiter()
 
 func _on_body_exited(body: Node2D) -> void:
-	Debug.debug(self, "%s Left the area of the pressure plate" % body.get_script().get_global_name(), false)
+	Debug.debug(self, "%s Left the area of the pressure plate" % body.name, false)
 	if body.is_in_group("Player") or body.is_in_group("Throwable") or body.is_in_group("Movable"):
 		# Play the transition animation (button being pressed)
 		sprite.play("Deactivate")

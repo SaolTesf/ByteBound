@@ -24,8 +24,8 @@ func check_reference(caller : Node, var_name : String, child : String ) -> bool:
 	
 	# attempt to fetch the the node from the owners children
 	var node = caller.find_child(child, true, false)
-	# if the node found is the has the same name as child, Set the value
-	if node.name == child:
+	# if a node was found and its name matches child, set the value
+	if node and node.name == child:
 		print("%s was found in %s setting reference" % [child, caller.name])
 		caller.set(var_name, node)
 		return true

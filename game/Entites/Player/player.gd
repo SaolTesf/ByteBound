@@ -97,11 +97,8 @@ func _on_key_collected() -> void:
 	has_key = true
 	Debug.debug(self, "Player Collected a Key\nHas Key: %s" % has_key, false)
 
-#Death by fov is already handled by fov script
-'''func _on_fov_entered(caller : Node2D, body : Node2D) -> void:
-	if self == body:
-		if caller is Enemy:
-			handleDeath("enemy")'''
+# Death by fov is already handled by the fov component, so the player does
+# not connect to fov_entered itself.
 
 			
 ## Determine which hitbox the player hit
