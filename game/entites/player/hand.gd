@@ -15,4 +15,3 @@ func update_direction(input : InputComponent):
 		position.x = abs(position.x)
 	else:
 		position.x = -abs(position.x)
-

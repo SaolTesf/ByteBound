@@ -1,39 +1,46 @@
-extends Area2D
-class_name FoV
-## calculates and draws the fov of the character
+class_name FoV extends Area2D
+## A vision cone that reports when a target enters or leaves it.
 ##
-## Uses RayCast2D to gather points in space to draw the fov collision polygon with.
-## Increase the num_of_segments to make the polygon smoother on surfaces
+## Casts rays each frame to build a collision/display polygon that bends around
+## obstacles. Communicates purely through [signal sighted] / [signal lost] — it
+## never reads or writes its owner. Increase [member num_of_segments] for a
+## smoother cone.
 
+## Emitted when the player enters the vision cone. Carries the sighted body.
+signal sighted(body: Node2D)
+## Emitted when the player leaves the vision cone.
+signal lost(body: Node2D)
 
 @export var fov_collision: CollisionPolygon2D
 @export var fov_display: Polygon2D
-var parent: Node2D
-#var detect: AudioStreamPlayer2D
 
-# used to create the fov
-var points: Array[Vector2] = [Vector2.ZERO] # hold points that make up the polygon
+# Points that make up the cone polygon.
+var points: Array[Vector2] = [Vector2.ZERO]
 var num_of_segments: int
 var sight_angle: float
 var sight_distance: float
 
-
 func _ready() -> void:
-	body_entered.connect(_on_fov_entered)
-	body_exited.connect(_on_fov_exited)
+	body_entered.connect(_on_body_entered)
+	body_exited.connect(_on_body_exited)
 
-	
-## Sets up the fov variables. these variables should be passed in from the parent
-func init(body : Node2D, segments : int, angle : float, distance : float) -> void:
-	self.parent = body
-	self.num_of_segments = segments
-	self.sight_angle = angle
-	self.sight_distance = distance
+## Configures the cone. Call from the owner's [method Node._ready].
+func init(segments: int, angle: float, distance: float) -> void:
+	num_of_segments = segments
+	sight_angle = angle
+	sight_distance = distance
 
-	
-# Handle RayCasting --------------------------------------------------------------------------------------------
-## Create a PhysicsRayQueryParameters2D object to cast a ray from the origin to the target
-## Pass this into intersect_ray() to get the first object it hits
+## Recomputes and redraws the cone for the given facing [param direction].
+## Call from the owner's [method Node._physics_process].
+func update(direction: float) -> void:
+	points.clear()
+	calc_ray_points(direction)
+	cast_rays()
+	draw_fov()
+	queue_redraw()
+
+#region Raycasting
+## Builds a ray query from [param origin] to [param target] using the cone's mask.
 func create_ray_params(origin: Vector2, target: Vector2) -> PhysicsRayQueryParameters2D:
 	var params = PhysicsRayQueryParameters2D.new()
 	params.from = origin
@@ -44,28 +51,18 @@ func create_ray_params(origin: Vector2, target: Vector2) -> PhysicsRayQueryParam
 	params.collide_with_areas = false
 	return params
 
-
-## Updates the points Array with the points to use in the polygon
-func calcRayPoint(direction : float = 0) -> void:
+## Fills [member points] with the cone's outline for the given facing direction.
+func calc_ray_points(direction: float = 0) -> void:
 	var half_angle = deg_to_rad(sight_angle) / 2.0
 	var angle_step = (2.0 * half_angle) / float(num_of_segments)
-
 	var facing = Vector2(direction, 0)
-	# Start from -half_angle and go to +half_angle
 	for i in range(num_of_segments + 1):
 		var angle = - half_angle + (angle_step * i)
-		
-		# Rotate the ray by the entity's facing direction plus the current angle
 		var d = facing.rotated(angle)
-		
-		# Calculate the endpoint
-		var endpoint = d * sight_distance
-		points.append(endpoint)
-	
+		points.append(d * sight_distance)
 
-## Takes the points array and cast a ray starting at the body ending on each point in the array
-## Checks in the ray hits an object. If it does make the point of contact the new point in the polygon
-func castRays() -> void:
+## Casts a ray to each point; on a hit, clamps the point to the contact position.
+func cast_rays() -> void:
 	var space_state = get_world_2d().direct_space_state
 	for i in range(points.size()):
 		var global_target = to_global(points[i])
@@ -74,53 +71,25 @@ func castRays() -> void:
 		if result:
 			points[i] = to_local(result.position)
 
-			
-func drawFOV() -> void:
-	# Create a properly formed polygon with the origin at the center
+## Applies [member points] to the collision and display polygons.
+func draw_fov() -> void:
 	var final_points = PackedVector2Array()
-	final_points.append(Vector2.ZERO) # Start with the origin
-	
-	# Add all other points in order
+	final_points.append(Vector2.ZERO)
 	for i in range(1, points.size()):
 		final_points.append(points[i])
-	
 	if fov_collision:
 		fov_collision.polygon = final_points
 	if fov_display:
 		fov_display.polygon = final_points
+#endregion
 
-		
-# Used to draw gizmos to debug the arrays
-# func _draw() -> void:
-# 	# Draw rays
-# 	for point in points:
-# 		draw_line(Vector2.ZERO, point, Color(1, 0, 0), 2.0)
-	
-# 	# Draw the FOV polygon outline (optional)
-# 	if points.size() > 1:
-# 		draw_polyline(points, Color(0, 1, 0), 2.0, true)
-
-
-func update(direction : float) -> void:
-	points.clear()
-	calcRayPoint(direction)
-	castRays()
-	drawFOV()
-	queue_redraw() # Redraw the gizmos
-
-
-#Signals -------------------------------------------------------------------------------------------------
-func _on_fov_entered(body: Node2D) -> void:
-	if body.name == "Player":
-		# play detection sound and start chase on the parent enemy
+#region Signal handlers
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Player"):
 		AudioController.play_sound("EnemyDetect")
-		parent.player_in_sight = true # use this to change state in the state machine.
-		parent.player = body
-		Debug.debug(self, "%s"%parent.player)
-		#Debug.debug(self, "player is in sight range: %s"%parent.player_in_sight)
+		sighted.emit(body)
 
-
-func _on_fov_exited(body: Node2D) -> void:
-	if body.name == "Player":
-		parent.player_in_sight = false
-		#Debug.debug(self, "player is in sight range: %s"%parent.player_in_sight)
+func _on_body_exited(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+		lost.emit(body)
+#endregion

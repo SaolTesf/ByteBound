@@ -27,14 +27,13 @@ func _ready() -> void:
 	# Set up the signals to detect when the player is in contact with the box.
 	hitbox.body_entered.connect(_on_body_entered)
 	hitbox.body_exited.connect(_on_body_exited)
-	gravity.init(self)
 	# Modify the gravity value directly for slower falling
 	gravity.gravity = gravity.gravity * gravity_scale
 	gravity.fast_fall_gravity = gravity.fast_fall_gravity * gravity_scale
 
 
 func _physics_process(delta: float) -> void:
-	gravity.physics_update(delta) # always apply gravity to the box
+	gravity.physics_update(self, delta) # always apply gravity to the box
 	if push_box:
 		# If the player is in contact with the box, apply a force to the box.
 		velocity.x = lerp(velocity.x, direction * push_force, acceleration * delta)

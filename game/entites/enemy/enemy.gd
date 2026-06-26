@@ -19,10 +19,19 @@ var player: CharacterBody2D
 
 func _ready() -> void:
 	super._ready()
-	fov.init(self, num_segments, sight_angle, sight_distance)
+	fov.init(num_segments, sight_angle, sight_distance)
+	fov.sighted.connect(_on_sighted)
+	fov.lost.connect(_on_lost)
 	hitbox.init(self)
 	dir = movement_stats.starting_dir
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	fov.update(dir)
+
+func _on_sighted(body: Node2D) -> void:
+	player_in_sight = true
+	player = body
+
+func _on_lost(_body: Node2D) -> void:
+	player_in_sight = false
