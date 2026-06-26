@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dt7r3ulugnh76"
+path="res://.godot/imported/gridlock_intro_Kicker.wav-dde2be8d33e9bdbe786a7c756c6e589a.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/True 8-Bit Music/Gridlock/intro/gridlock_intro_Kicker.wav"
+dest_files=["res://.godot/imported/gridlock_intro_Kicker.wav-dde2be8d33e9bdbe786a7c756c6e589a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

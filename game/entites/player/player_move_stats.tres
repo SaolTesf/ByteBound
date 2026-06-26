@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MoveStats" format=3 uid="uid://3y2cdy74dhsn"]
+
+[ext_resource type="Script" uid="uid://krgx50cxctd0" path="res://custom-resources/move_stats.gd" id="1_3bx64"]
+
+[resource]
+script = ExtResource("1_3bx64")
+multi_jump = true
+enable_dash = true
+air_speed = 90.0
+ground_acceleration = 200.0
+ground_deceleration = 150.0
+air_deceleration = 50.0
+max_jumps = 2
+dash_duration = 0.2
+dash_cooldown = 1.0
+dash_distance = 40.0

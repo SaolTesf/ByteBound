@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://b5awsjbb8w6pi"]
+
+[ext_resource type="Texture2D" uid="uid://hmdkfr13ipvd" path="res://Assets/Objects/ThrowableObjects/ThrowableObject.png" id="1_2cyfx"]
+[ext_resource type="PackedScene" uid="uid://t4ij3l5v76t" path="res://components/hit-box/hit_box.tscn" id="3_shsdt"]
+[ext_resource type="Script" path="res://components/pickup/pickup_component.gd" id="4_pick"]
+[ext_resource type="Script" path="res://components/throw/throw_component.gd" id="5_throw"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_h8ma4"]
+friction = 0.2
+bounce = 0.2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pfaeh"]
+
+[node name="ThrowableObject" type="RigidBody2D" groups=["Throwable"]]
+collision_layer = 64
+collision_mask = 195
+mass = 0.5
+physics_material_override = SubResource("PhysicsMaterial_h8ma4")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("1_2cyfx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_pfaeh")
+
+[node name="HitBox" parent="." instance=ExtResource("3_shsdt")]
+collision_layer = 64
+collision_mask = 3
+shape_type = 0
+x = 20.0
+
+[node name="PickupComponent" type="Node" parent="." node_paths=PackedStringArray("body", "collision", "hitbox")]
+script = ExtResource("4_pick")
+body = NodePath("..")
+collision = NodePath("../CollisionShape2D")
+hitbox = NodePath("../HitBox")
+
+[node name="ThrowComponent" type="Node" parent="." node_paths=PackedStringArray("pickup")]
+script = ExtResource("5_throw")
+pickup = NodePath("../PickupComponent")
+
+[editable path="HitBox"]

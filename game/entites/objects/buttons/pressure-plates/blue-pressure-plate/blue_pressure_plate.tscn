@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://biuxaol52s4r8"]
+
+[ext_resource type="Texture2D" uid="uid://01x5vygsmyds" path="res://Assets/Objects/Buttons/BluePressurePlate/BluePressurePlate1.png" id="1_0ehfh"]
+[ext_resource type="Script" path="res://components/channel/channel_emitter_component.gd" id="1_g8cu4"]
+[ext_resource type="Texture2D" uid="uid://bwmjj4caj54xq" path="res://Assets/Objects/Buttons/BluePressurePlate/BluePressurePlate2.png" id="2_heo8p"]
+[ext_resource type="Texture2D" uid="uid://blr7ou2untmdt" path="res://Assets/Objects/Buttons/BluePressurePlate/BluePressurePlate3.png" id="3_6gvhh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8w0ih"]
+size = Vector2(10.5006, 2.00469)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1y2nq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_0ehfh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_heo8p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6gvhh")
+}],
+"loop": false,
+"name": &"Activate",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6gvhh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_heo8p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_0ehfh")
+}],
+"loop": false,
+"name": &"Deactivate",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_0ehfh")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ms51c"]
+polygon = PackedVector2Array(-3.55048, 0.267429, -3.59219, 1.01828, 3.666, 0.99742, 3.58257, 0.319571, 0.0264778, -0.431276)
+
+[sub_resource type="Gradient" id="Gradient_8dnqo"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_det8a"]
+gradient = SubResource("Gradient_8dnqo")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="BluePressurePlate" type="Area2D"]
+collision_layer = 16
+collision_mask = 66
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.368133, -0.955496)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_8w0ih")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-0.198425, -4.66299)
+scale = Vector2(0.911092, 0.756993)
+sprite_frames = SubResource("SpriteFrames_1y2nq")
+animation = &"Idle"
+
+[node name="StaticBody" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody"]
+polygon = PackedVector2Array(-2.78093, -1.08209, -6.33941, 0.884437, 6.53667, 0.837613, 3.16547, -1.08209)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_ms51c")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0.351166, -2.43714)
+scale = Vector2(0.394239, 0.141973)
+color = Color(0, 1, 1, 1)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_det8a")
+
+[node name="ChannelEmitter" type="Node" parent="." node_paths=PackedStringArray("area", "sprite", "light")]
+script = ExtResource("1_g8cu4")
+area = NodePath("..")
+sprite = NodePath("../AnimatedSprite2D")
+light = NodePath("../PointLight2D")
+channel = 2
+trigger_groups = Array[String](["Player", "Throwable", "Movable"])

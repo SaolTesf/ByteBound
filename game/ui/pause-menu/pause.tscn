@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://dds57a87tgua8"]
+
+[ext_resource type="Script" uid="uid://bsc5kbai7gcps" path="res://ui/pause-menu/pause.gd" id="1_4gtah"]
+[ext_resource type="Theme" uid="uid://cjrb4f2yj7vjw" path="res://ui/main-menu/main_menu_theme.tres" id="2_i1uko"]
+[ext_resource type="LabelSettings" uid="uid://baonky01jfi24" path="res://Assets/Font/Label.tres" id="3_owbh0"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_4gtah")
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0.458824)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="TitleContainer" type="MarginContainer" parent="Panel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_i1uko")
+
+[node name="Title" type="Label" parent="Panel/HBoxContainer/VBoxContainer/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 45
+text = "Time Has Frozen
+"
+label_settings = ExtResource("3_owbh0")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="ButtonContainer" type="MarginContainer" parent="Panel/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_top = 40
+
+[node name="VBox" type="VBoxContainer" parent="Panel/HBoxContainer/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="MainMenu" type="Button" parent="Panel/HBoxContainer/VBoxContainer/ButtonContainer/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_i1uko")
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.141176, 0.827451, 0.192157, 1)
+theme_override_constants/outline_size = 10
+text = "Main Menu
+"
+
+[node name="Reload" type="Button" parent="Panel/HBoxContainer/VBoxContainer/ButtonContainer/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_i1uko")
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.141176, 0.278431, 0.964706, 1)
+theme_override_constants/outline_size = 10
+text = "Reload
+"
+
+[node name="Quit" type="Button" parent="Panel/HBoxContainer/VBoxContainer/ButtonContainer/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_i1uko")
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0.775167, 0.29, 1)
+theme_override_constants/outline_size = 10
+text = "Quit
+"

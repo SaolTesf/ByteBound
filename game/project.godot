@@ -8,21 +8,26 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="ByteBound"
-run/main_scene="res://UI/MainMenu/MainMenuControlNode.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+run/main_scene="res://ui/main-menu/main_menu_control_node.tscn"
+config/features=PackedStringArray("4.6", "Forward Plus")
+config/icon="res://Assets/icon.svg"
 
 [autoload]
 
-SignalHub="*res://Autoloads/SignalHub.gd"
-SceneManager="*res://Autoloads/SceneManager.gd"
-Globals="*res://Autoloads/Globals.gd"
-Debug="*res://Autoloads/Debug.gd"
-Validate="*res://Autoloads/Validation.gd"
-AudioController="*res://Autoloads/audio_controller.tscn"
+SignalHub="*res://autoloads/signal_hub.gd"
+SceneManager="*res://autoloads/scene_manager.gd"
+Debug="*res://autoloads/debug.gd"
+BeehaveGlobalMetrics="*res://addons/beehave/metrics/beehave_global_metrics.gd"
+BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
+AudioSettings="*res://autoloads/audio_settings.gd"
+AudioPool="*res://addons/audio-pool/autoloads/audio_pool.gd"
 
 [display]
 
@@ -39,7 +44,7 @@ project/assembly_name="ByteBound"
 [file_customization]
 
 folder_colors={
-"res://Assets/": "gray",
+"res://Assets/": "orange",
 "res://Assets/Objects/Barriers/BlueBeam/": "blue",
 "res://Assets/Objects/Barriers/GreenBeam/": "green",
 "res://Assets/Objects/Barriers/RedBeam/": "red",
@@ -49,19 +54,22 @@ folder_colors={
 "res://Assets/Objects/Buttons/GreenPressurePlate/": "green",
 "res://Assets/Objects/Buttons/RedPedistal/": "red",
 "res://Assets/Objects/Buttons/RedPressurePlate/": "red",
-"res://Autoloads/": "blue",
-"res://Scenes/": "purple",
-"res://Scripts/": "yellow",
-"res://Scripts/Objects/Buttons/Pedestals/BluePedestal/": "blue",
-"res://Scripts/Objects/Buttons/Pedestals/GreenPedestal/": "green",
-"res://Scripts/Objects/Buttons/Pedestals/RedPedestal/": "red",
-"res://Scripts/Objects/Buttons/PressurePlates/BluePressurePlate/": "blue",
-"res://Scripts/Objects/Buttons/PressurePlates/GreenPressurePlate/": "green",
-"res://Scripts/Objects/Buttons/PressurePlates/RedPressurePlate/": "red",
-"res://Scripts/Objects/Hazards/Lazers/BlueLazer/": "blue",
-"res://Scripts/Objects/Hazards/Lazers/GreenLaser/": "green",
-"res://Scripts/Objects/Hazards/Lazers/RedLaser/": "red",
-"res://UI/": "pink"
+"res://addons/": "red",
+"res://autoloads/": "yellow",
+"res://components/": "green",
+"res://custom-resources/": "teal",
+"res://entites/": "blue",
+"res://entites/objects/buttons/pedestals/blue-pedestal/": "blue",
+"res://entites/objects/buttons/pedestals/green-pedestal/": "green",
+"res://entites/objects/buttons/pedestals/red-pedestal/": "red",
+"res://entites/objects/buttons/pressure-plates/blue-pressure-plate/": "blue",
+"res://entites/objects/buttons/pressure-plates/green-pressure-plate/": "green",
+"res://entites/objects/buttons/pressure-plates/red-pressure-plate/": "red",
+"res://entites/objects/hazards/lazers/blue-lazer/": "blue",
+"res://entites/objects/hazards/lazers/green-laser/": "green",
+"res://entites/objects/hazards/lazers/red-laser/": "red",
+"res://scenes/": "purple",
+"res://ui/": "pink"
 }
 
 [global_group]

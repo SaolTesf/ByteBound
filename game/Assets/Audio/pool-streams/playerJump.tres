@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AudioPoolStream" format=3 uid="uid://csestseec5glr"]
+
+[ext_resource type="Script" uid="uid://dxvohn2w3oets" path="res://addons/audio-pool/custom-resources/audio_pool_effect.gd" id="1_55j2h"]
+[ext_resource type="Script" uid="uid://cuvp6mktwb38w" path="res://addons/audio-pool/custom-resources/audio_pool_stream.gd" id="1_jump"]
+[ext_resource type="AudioStream" uid="uid://kbuq1jxcu6qj" path="res://Assets/Audio/PlayerJump.wav" id="2_jump"]
+
+[resource]
+script = ExtResource("1_jump")
+stream_name = &"PlayerJump"
+audio_bus = "SFX"
+dimension = 1
+stream = ExtResource("2_jump")
+volume = 100

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AudioPoolStream" format=3 uid="uid://x3oigdif866g"]
+
+[ext_resource type="Script" uid="uid://dxvohn2w3oets" path="res://addons/audio-pool/custom-resources/audio_pool_effect.gd" id="1_7idcv"]
+[ext_resource type="Script" uid="uid://cuvp6mktwb38w" path="res://addons/audio-pool/custom-resources/audio_pool_stream.gd" id="1_detect"]
+[ext_resource type="AudioStream" uid="uid://cppxm8tnt0k5b" path="res://Assets/Audio/EnemyDetect.wav" id="2_detect"]
+
+[resource]
+script = ExtResource("1_detect")
+stream_name = &"EnemyDetect"
+audio_bus = "SFX"
+dimension = 1
+stream = ExtResource("2_detect")
+volume = 100

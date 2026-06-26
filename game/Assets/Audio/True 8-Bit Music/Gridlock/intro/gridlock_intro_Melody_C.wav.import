@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c2kar77h31rcp"
+path="res://.godot/imported/gridlock_intro_Melody_C.wav-07de4c424a5bcfc5041850fac2a87064.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/True 8-Bit Music/Gridlock/intro/gridlock_intro_Melody_C.wav"
+dest_files=["res://.godot/imported/gridlock_intro_Melody_C.wav-07de4c424a5bcfc5041850fac2a87064.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
