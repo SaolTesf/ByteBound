@@ -11,6 +11,8 @@ signal sighted(body: Node2D)
 ## Emitted when the player leaves the vision cone.
 signal lost(body: Node2D)
 
+const ENEMY_DETECT: AudioPoolStream = preload("res://Assets/Audio/pool-streams/enemyDetect.tres")
+
 @export var fov_collision: CollisionPolygon2D
 @export var fov_display: Polygon2D
 
@@ -86,7 +88,7 @@ func draw_fov() -> void:
 #region Signal handlers
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		AudioController.play_sound("EnemyDetect")
+		AudioPool.play(ENEMY_DETECT, global_position)
 		sighted.emit(body)
 
 func _on_body_exited(body: Node2D) -> void:

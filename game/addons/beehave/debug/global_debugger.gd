@@ -7,7 +7,10 @@ var _editor_visible: bool = false # Track editor visibility
 
 
 func _enter_tree() -> void:
+	if not EngineDebugger.is_active():
+		return
 	EngineDebugger.register_message_capture("beehave", _on_debug_message)
+	return
 
 
 func _on_debug_message(message: String, data: Array) -> bool:

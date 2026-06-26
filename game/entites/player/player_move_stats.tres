@@ -4,26 +4,13 @@
 
 [resource]
 script = ExtResource("1_3bx64")
-can_move = false
-can_idle = false
-idle_time = 4.0
-move_time = 4.0
-starting_dir = 1
-advanced_movement = false
 multi_jump = true
 enable_dash = true
-ground_speed = 100.0
 air_speed = 90.0
 ground_acceleration = 200.0
-air_acceleration = 20.0
 ground_deceleration = 150.0
 air_deceleration = 50.0
-jump_height = -400.0
 max_jumps = 2
-multi_jump_height_multiplier = 0.8
-coyote_jump_time = 0.5
-jump_buffer_time = 0.2
-dash_multiplier = 3.0
-dash_duration = 0.5
+dash_duration = 0.2
 dash_cooldown = 1.0
-dash_distance = 100.0
+dash_distance = 40.0

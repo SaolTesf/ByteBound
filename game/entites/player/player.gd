@@ -5,6 +5,10 @@ class_name Player extends BaseCharacter
 ## throw hand, the follow camera, object pushing, and death/respawn. Movement is
 ## driven by the child FSM ([FSMachine2D]).
 
+const CARD_COLLECT: AudioPoolStream = preload("res://Assets/Audio/pool-streams/cardCollect.tres")
+const PUSH_FORCE: float = 15.0
+const MIN_PUSH_FORCE: float = 1.0
+
 @export var input: InputComponent
 @export var hand : HolderComponent
 @export var camera : Camera2D
@@ -19,9 +23,6 @@ class_name Player extends BaseCharacter
 
 var has_key: bool = false
 var was_spoted : bool = false
-
-const PUSH_FORCE: float = 15.0
-const MIN_PUSH_FORCE: float = 1.0
 
 #Variables to handle respawn
 var isDead = false
@@ -82,7 +83,7 @@ func _on_death_timer_timeout():
 # Signals --------------------------------------------------------------------
 func _on_key_collected() -> void:
 	has_key = true
-	AudioController.play_sound("CardCollect")
+	AudioPool.play(CARD_COLLECT, global_position)
 	Debug.debug(self, "Player collected the key", false)
 
 # Death by fov is already handled by the fov component, so the player does

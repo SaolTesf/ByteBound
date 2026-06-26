@@ -41,9 +41,11 @@ func stop(player: Node) -> void:
 
 func clear() -> void:
 	for p in _active + _free:
-		p.queue_free()
+		_stop_player(p)
+		p.free()
 	_active.clear()
 	_free.clear()
+	return
 
 func _acquire() -> Node:
 	if not _free.is_empty():
@@ -63,6 +65,18 @@ func _release(player: Node) -> void:
 
 func _on_finished(player: Node) -> void:
 	_release(player)
+	return
+
+func _stop_player(player: Node) -> void:
+	if player is AudioStreamPlayer:
+		(player as AudioStreamPlayer).stop()
+		return
+	if player is AudioStreamPlayer2D:
+		(player as AudioStreamPlayer2D).stop()
+		return
+	if player is AudioStreamPlayer3D:
+		(player as AudioStreamPlayer3D).stop()
+	return
 
 @abstract func _create_player() -> Node
 @abstract func _apply_position(player: Node, at: Variant) -> void

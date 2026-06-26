@@ -5,6 +5,9 @@ class_name ChannelEmitterComponent extends Node
 ## activate once and stay; non-latching ones (pressure plates) deactivate when
 ## the last qualifying body leaves. Configures pedestal vs plate by data, not type.
 
+const BUTTON_INTERACT: AudioPoolStream = preload("res://Assets/Audio/pool-streams/buttonInteract.tres")
+const PLATE_STEPPED: AudioPoolStream = preload("res://Assets/Audio/pool-streams/plateStepped.tres")
+
 signal activated
 signal deactivated
 
@@ -42,10 +45,10 @@ func _on_body_exited(b: Node2D) -> void:
 
 func _broadcast() -> void:
 	if latch:
-		AudioController.play_sound("ButtonInteract")
+		AudioPool.play(BUTTON_INTERACT, area.global_position)
 		SignalHub.pedestal_activated.emit(channel)
 	else:
-		AudioController.play_sound("PlateStepped")
+		AudioPool.play(PLATE_STEPPED, area.global_position)
 		if is_activated:
 			SignalHub.pressure_plate_activated.emit(channel)
 		else:

@@ -24,7 +24,9 @@ config/icon="res://Assets/icon.svg"
 SignalHub="*res://autoloads/signal_hub.gd"
 SceneManager="*res://autoloads/scene_manager.gd"
 Debug="*res://autoloads/debug.gd"
-AudioController="*res://autoloads/audio_controller.tscn"
+BeehaveGlobalMetrics="*res://addons/beehave/metrics/beehave_global_metrics.gd"
+BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
+AudioSettings="*res://autoloads/audio_settings.gd"
 AudioPool="*res://addons/audio-pool/autoloads/audio_pool.gd"
 
 [display]

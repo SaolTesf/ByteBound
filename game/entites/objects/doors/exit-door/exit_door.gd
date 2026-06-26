@@ -27,8 +27,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if !_door_sprite.is_playing() and _level_complete:
 		_level_complete = false
-		if SceneManager.current_level_path == SceneManager.level_paths.size():
-				SceneManager.open_win_menu()
 		await _delay(_door_delay)
 		SceneManager.next()
 	

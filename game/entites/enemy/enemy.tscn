@@ -4,42 +4,25 @@
 [ext_resource type="Script" uid="uid://krgx50cxctd0" path="res://custom-resources/move_stats.gd" id="2_6e87y"]
 [ext_resource type="Texture2D" uid="uid://c8gexo4j6yuai" path="res://Assets/Sprites/Enemy_Spritesheet.png" id="3_7k8h2"]
 [ext_resource type="Script" uid="uid://yl4i15swrqs6" path="res://components/hit-box/hitbox.gd" id="3_w6xml"]
-[ext_resource type="Script" uid="uid://eibvlqug7l7x" path="res://addons/StateMachine/scripts/state_machine_2d.gd" id="5_qi620"]
-[ext_resource type="Script" uid="uid://cd2dfpkyxciss" path="res://entites/enemy/enemy-states/idle.gd" id="6_encld"]
-[ext_resource type="Script" uid="uid://bylojrmngsi6j" path="res://entites/enemy/enemy-states/patrol.gd" id="6_la3kd"]
-[ext_resource type="Script" path="res://components/movement/gravity_component.gd" id="8_fifas"]
-[ext_resource type="Script" uid="uid://v1y5jdjhsde2" path="res://entites/enemy/enemy-states/chase.gd" id="8_jt8rg"]
+[ext_resource type="Script" uid="uid://bb0t2ovl7wifo" path="res://addons/beehave/nodes/beehave_tree.gd" id="5_tree"]
+[ext_resource type="Script" uid="uid://cw22yurt5l74k" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="6_selector"]
+[ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="7_sequence"]
+[ext_resource type="Script" uid="uid://c32yt13twoygo" path="res://components/movement/gravity_component.gd" id="8_fifas"]
 [ext_resource type="PackedScene" uid="uid://cq5skp1ss73rt" path="res://components/fov/fov.tscn" id="8_w3277"]
-[ext_resource type="Script" uid="uid://cmjnyuv507tq3" path="res://entites/enemy/enemy-states/look_around.gd" id="9_niyo1"]
-[ext_resource type="PackedScene" path="res://components/animations/animation_component.tscn" id="9_volv0"]
-[ext_resource type="Script" path="res://components/locomotion/locomotion_component.gd" id="10_loco"]
-[ext_resource type="Script" path="res://components/movement/walk_component.gd" id="11_walk"]
+[ext_resource type="PackedScene" uid="uid://csm57rtwrxq0t" path="res://components/animations/animation_component.tscn" id="9_volv0"]
+[ext_resource type="Script" uid="uid://biyrckcem0i53" path="res://components/locomotion/locomotion_component.gd" id="10_loco"]
+[ext_resource type="Script" uid="uid://cqaq7nvdoc6ks" path="res://components/movement/walk_component.gd" id="11_walk"]
+[ext_resource type="Script" uid="uid://s7v50sw87g2l" path="res://entites/enemy/behavior-tree/can_see_player_condition.gd" id="12_can_see"]
+[ext_resource type="Script" uid="uid://bcuccxqye56ne" path="res://entites/enemy/behavior-tree/chase_player_action.gd" id="13_chase"]
+[ext_resource type="Script" uid="uid://doosg5qlg118c" path="res://entites/enemy/behavior-tree/should_search_condition.gd" id="14_search_condition"]
+[ext_resource type="Script" uid="uid://4x1gknjn6bww" path="res://entites/enemy/behavior-tree/look_around_action.gd" id="15_look"]
+[ext_resource type="Script" uid="uid://bhdgf1wl18l2g" path="res://entites/enemy/behavior-tree/patrol_idle_routine_action.gd" id="16_patrol_idle"]
+[ext_resource type="Script" uid="uid://byp23fgvgravb" path="res://entites/enemy/behavior-tree/should_return_home_condition.gd" id="17_return_condition"]
+[ext_resource type="Script" uid="uid://rflmfrbssggb" path="res://entites/enemy/behavior-tree/return_home_action.gd" id="18_return_action"]
+[ext_resource type="Script" uid="uid://co0sh26hvd7gk" path="res://components/movement/jump_component.gd" id="19_jump"]
 
 [sub_resource type="Resource" id="Resource_5fr5x"]
 script = ExtResource("2_6e87y")
-can_move = false
-can_idle = false
-idle_time = 4.0
-move_time = 4.0
-starting_dir = 1
-advanced_movement = false
-multi_jump = false
-enable_dash = false
-ground_speed = 100.0
-air_speed = 50.0
-ground_acceleration = 80.0
-air_acceleration = 20.0
-ground_deceleration = 50.0
-air_deceleration = 80.0
-jump_height = -400.0
-max_jumps = 1
-multi_jump_height_multiplier = 0.8
-coyote_jump_time = 0.5
-jump_buffer_time = 0.2
-dash_multiplier = 2.0
-dash_duration = 2.0
-dash_cooldown = 4.0
-dash_distance = 100.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4hpyq"]
 
@@ -94,76 +77,89 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "hitbox", "fov", "walk")]
+[node name="Enemy" type="CharacterBody2D" unique_id=189295387 node_paths=PackedStringArray("hitbox", "walk", "jump", "fov", "sprite")]
 collision_layer = 4
 collision_mask = 35
 script = ExtResource("1_jji55")
-sprite = NodePath("AnimatedSprite2D")
-movement_stats = SubResource("Resource_5fr5x")
 hitbox = NodePath("Hitbox")
-fov = NodePath("FoV")
 walk = NodePath("Locomotion/Walk")
+jump = NodePath("Locomotion/Jump")
+fov = NodePath("FoV")
 num_segments = 20
 sight_distance = 100.0
 sight_angle = 40.0
+sprite = NodePath("AnimatedSprite2D")
+movement_stats = SubResource("Resource_5fr5x")
 metadata/_edit_group_ = true
 
-[node name="FoV" parent="." groups=["Enemy"] instance=ExtResource("8_w3277")]
+[node name="FoV" parent="." unique_id=108719986 groups=["Enemy"] instance=ExtResource("8_w3277")]
 modulate = Color(1, 0.461017, 0.392737, 0.415686)
 position = Vector2(2, -2.5)
 collision_layer = 4
 collision_mask = 103
 
-[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("collision_shape")]
+[node name="Hitbox" type="Area2D" parent="." unique_id=1735720019 node_paths=PackedStringArray("collision_shape")]
 script = ExtResource("3_w6xml")
 collision_shape = NodePath("../CollisionShape2D")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=522208995]
 shape = SubResource("RectangleShape2D_4hpyq")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1255399345]
 sprite_frames = SubResource("SpriteFrames_pnrbr")
 animation = &"Idle"
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
-script = ExtResource("5_qi620")
-starting_state = NodePath("Idle")
+[node name="BeehaveTree" type="Node" parent="." unique_id=1478626543 node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("5_tree")
+blackboard = NodePath("@Node@26378")
+actor = NodePath("..")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("patrol", "idle", "chase")]
-script = ExtResource("6_encld")
-state_name = "Idle"
-patrol = NodePath("../Patrol")
-idle = NodePath(".")
-chase = NodePath("../Chase")
+[node name="RootSelector" type="Node" parent="BeehaveTree" unique_id=1812976733]
+script = ExtResource("6_selector")
 
-[node name="Patrol" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "patrol", "chase")]
-script = ExtResource("6_la3kd")
-state_name = "Patrol"
-idle = NodePath("../Idle")
-patrol = NodePath(".")
-chase = NodePath("../Chase")
+[node name="ChaseBranch" type="Node" parent="BeehaveTree/RootSelector" unique_id=1779536451]
+script = ExtResource("7_sequence")
 
-[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "look_around")]
-script = ExtResource("8_jt8rg")
-state_name = "Chase"
-idle = NodePath("../Idle")
-look_around = NodePath("../LookAround")
+[node name="CanSeePlayer" type="Node" parent="BeehaveTree/RootSelector/ChaseBranch" unique_id=199124729]
+script = ExtResource("12_can_see")
 
-[node name="LookAround" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "chase_state")]
-script = ExtResource("9_niyo1")
-state_name = "LookAround"
-idle_state = NodePath("../Idle")
-chase_state = NodePath("../Chase")
+[node name="ChasePlayer" type="Node" parent="BeehaveTree/RootSelector/ChaseBranch" unique_id=2033900045]
+script = ExtResource("13_chase")
 
-[node name="Locomotion" type="Node" parent="."]
+[node name="SearchBranch" type="Node" parent="BeehaveTree/RootSelector" unique_id=321011785]
+script = ExtResource("7_sequence")
+
+[node name="ShouldSearch" type="Node" parent="BeehaveTree/RootSelector/SearchBranch" unique_id=1447899482]
+script = ExtResource("14_search_condition")
+
+[node name="LookAround" type="Node" parent="BeehaveTree/RootSelector/SearchBranch" unique_id=1911371560]
+script = ExtResource("15_look")
+
+[node name="ReturnHomeBranch" type="Node" parent="BeehaveTree/RootSelector" unique_id=1718107927]
+script = ExtResource("7_sequence")
+
+[node name="ShouldReturnHome" type="Node" parent="BeehaveTree/RootSelector/ReturnHomeBranch" unique_id=1731583822]
+script = ExtResource("17_return_condition")
+
+[node name="ReturnHome" type="Node" parent="BeehaveTree/RootSelector/ReturnHomeBranch" unique_id=1719337635]
+script = ExtResource("18_return_action")
+
+[node name="PatrolIdleRoutine" type="Node" parent="BeehaveTree/RootSelector" unique_id=1509560775]
+script = ExtResource("16_patrol_idle")
+
+[node name="Locomotion" type="Node" parent="." unique_id=1259373428]
 script = ExtResource("10_loco")
 
-[node name="Gravity" type="Node" parent="Locomotion"]
+[node name="Gravity" type="Node" parent="Locomotion" unique_id=1807321311]
 script = ExtResource("8_fifas")
 
-[node name="Walk" type="Node" parent="Locomotion"]
+[node name="Walk" type="Node" parent="Locomotion" unique_id=298565478]
 script = ExtResource("11_walk")
 stats = SubResource("Resource_5fr5x")
 
-[node name="AnimationComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("9_volv0")]
+[node name="Jump" type="Node" parent="Locomotion" unique_id=2049205218]
+script = ExtResource("19_jump")
+stats = SubResource("Resource_5fr5x")
+
+[node name="AnimationComponent" parent="." unique_id=1718463724 node_paths=PackedStringArray("sprite") instance=ExtResource("9_volv0")]
 sprite = NodePath("../AnimatedSprite2D")

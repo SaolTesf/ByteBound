@@ -1,103 +1,122 @@
 extends Node
-# List of tutorial Levels
-var move_tutorial = "res://scenes/levels/tutorials/move_tutorial.tscn"
-var jump_tutorial = "res://scenes/levels/tutorials/jump_tutorial.tscn"
-var dash_tutorial = "res://scenes/levels/tutorials/dash_tutorial.tscn"
-var box_tutorial = "res://scenes/levels/tutorials/box_tutorial.tscn"
-var throw_tutorial = "res://scenes/levels/tutorials/throw_tutorial.tscn"
-# List of the levels in the game
-var level_00 : String = "res://scenes/levels/level_00.tscn"
-var level_01 : String = "res://scenes/levels/level_01.tscn"
-var level_02 : String = "res://scenes/levels/level_02.tscn"
-var level_03 : String = "res://scenes/levels/level_03.tscn"
-var level_04 : String = "res://scenes/levels/level_04.tscn"
+## Scene transition service and active campaign tracker.
 
-# array to hold all the level paths
-var level_paths : Array[String] = [
-	move_tutorial, jump_tutorial, dash_tutorial, box_tutorial,
-	throw_tutorial, level_00,level_01, level_02, level_03,level_04]
+var current_scene: Node
+var current_scene_resource: PackedScene
+var current_level_index: int = -1
+var current_level: Resource
 
-var current_level_path: int = 0 # Start on the first level.
-var current_level = null
+var _campaign_levels: Array[Resource] = []
+var _completion_scene: PackedScene
 
-var mainMenuPath : String = "res://ui/main-menu/main_menu_control_node.tscn"
-var levelSelectPath : String = "res://ui/level-select/level_select_menu.tscn"
-var winMenuPath : String = "res://ui/game-over/game_over.tscn"
-var tutorialSelectPath : String = "res://ui/level-select/tutorial-levels/tutorial_levels.tscn"
-var regularSelectPath : String = "res://ui/level-select/regular-levels/regular_levels.tscn"
-var settingsMenuPath : String = "res://ui/options-menu/settings.tscn"
-
+#region Engine Methods
 func _ready() -> void:
-	var root = get_tree().root
-	current_level = root.get_child(-1)
+	current_scene = get_tree().current_scene
+	if current_scene == null and get_tree().root.get_child_count() > 0:
+		current_scene = get_tree().root.get_child(-1)
+	return
+#endregion
 
-func play() -> void: #function to start game at level 1 when clicking play
-	current_level_path = 0
-	load_level(level_paths[0])
+#region Public API
+func change_to(scene: PackedScene) -> void:
+	if scene == null:
+		push_error("SceneManager: scene not set.")
+		return
 
-func selectLevel(levelNum) -> void:
-	current_level_path = levelNum
-	load_level(level_paths[levelNum])
-
-func open_win_menu():
-	load_level(winMenuPath)
-
-func open_level_select(): #function to navigate to the level select scene
-	load_level(levelSelectPath)
-
-func open_tutorial_selection():
-	load_level(tutorialSelectPath)
-
-func open_regualr_selection():
-	load_level(regularSelectPath)
-	
-func open_main_menu(): #function to navigate to main menu scene
-	load_level(mainMenuPath)
-	
-func open_settings_menu(): #function to navigate to main menu scene
-	load_level(settingsMenuPath)
-
-func load_level(level) -> void:
 	reset_pause()
-	_defered_load_level.call_deferred(level)
+	current_scene_resource = scene
+	_deferred_change_to.call_deferred(scene)
+	return
 
-func _defered_load_level(level) -> void:
-	# It is now safe to remove the current scene.
-	if current_level != null:
-		current_level.queue_free()
+func start_campaign(levels: Array, completion_scene: PackedScene, start_index: int = 0) -> void:
+	if levels.is_empty():
+		push_error("SceneManager: campaign levels are empty.")
+		return
 
-	# Load the new scene.
-	var s = ResourceLoader.load(level)
+	_campaign_levels.clear()
+	for item in levels:
+		var level: Resource = item as Resource
+		if level == null:
+			continue
+		_campaign_levels.append(level)
+	_completion_scene = completion_scene
+	go_to_level(start_index)
+	return
 
-	# Instance the new scene.
-	current_level = s.instantiate()
+func go_to_level(index: int) -> void:
+	if not _has_level(index):
+		push_error("SceneManager: level index %d is out of range." % index)
+		return
 
-	# Add it to the active scene, as child of root.
-	get_tree().root.add_child(current_level)
+	var level: Resource = _campaign_levels[index]
+	var level_scene: PackedScene = _get_level_scene(level)
+	if level_scene == null:
+		push_error("SceneManager: level %d has no scene." % index)
+		return
 
-	# Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.
-	get_tree().current_scene = current_level
-	
-	
-func reload() -> void:
-	load_level(level_paths[current_level_path])
+	current_level_index = index
+	current_level = level
+	change_to(level_scene)
+	return
 
 func next() -> void:
-	current_level_path += 1
-	var message : String = "Current Level Index: %d\nNumber of Levels: %d"
-	var params : Array = [current_level_path, level_paths.size()]
-	Debug.debug(self, message % params)
-	if current_level_path >= level_paths.size():
-		#loading past the last level open the win screen
-		open_win_menu()
+	if _campaign_levels.is_empty():
+		push_error("SceneManager: no active campaign.")
 		return
-	load_level(level_paths[current_level_path])
 
+	var next_index: int = current_level_index + 1
+	if next_index >= _campaign_levels.size():
+		_complete_campaign()
+		return
 
-func previous() -> void:
-	current_level_path -= 1
-	load_level(level_paths[current_level_path])
+	go_to_level(next_index)
+	return
 
-func reset_pause():
+func reload() -> void:
+	if not _has_level(current_level_index):
+		push_error("SceneManager: no active level to reload.")
+		return
+
+	var level: Resource = _campaign_levels[current_level_index]
+	var level_scene: PackedScene = _get_level_scene(level)
+	if level_scene == null:
+		push_error("SceneManager: current level has no scene.")
+		return
+
+	change_to(level_scene)
+	return
+
+func reset_pause() -> void:
 	if get_tree().paused:
 		get_tree().paused = false
+	return
+#endregion
+
+#region Private Helpers
+func _deferred_change_to(scene: PackedScene) -> void:
+	var error: Error = get_tree().change_scene_to_packed(scene)
+	if error != OK:
+		push_error("SceneManager: failed to change scene with error %d." % error)
+		return
+
+	current_scene = get_tree().current_scene
+	return
+
+func _complete_campaign() -> void:
+	if _completion_scene == null:
+		push_error("SceneManager: campaign completion scene not set.")
+		return
+
+	current_level_index = _campaign_levels.size()
+	current_level = null
+	change_to(_completion_scene)
+	return
+
+func _has_level(index: int) -> bool:
+	return index >= 0 and index < _campaign_levels.size()
+
+func _get_level_scene(level: Resource) -> PackedScene:
+	if level == null:
+		return null
+	return level.get("scene") as PackedScene
+#endregion

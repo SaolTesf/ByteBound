@@ -11,12 +11,12 @@
 [ext_resource type="Script" uid="uid://d2wvgxoutetsq" path="res://entites/player/player-states/dash.gd" id="7_i2536"]
 [ext_resource type="Script" uid="uid://b84f3r6hx040m" path="res://entites/player/player-states/fall.gd" id="7_y3686"]
 [ext_resource type="PackedScene" uid="uid://ba0doa040rdwp" path="res://components/input/input_component.tscn" id="9_yvic6"]
-[ext_resource type="Script" path="res://components/holder/holder_component.gd" id="12_48m5d"]
-[ext_resource type="Script" path="res://components/locomotion/locomotion_component.gd" id="13_loco"]
-[ext_resource type="Script" path="res://components/movement/gravity_component.gd" id="14_grav"]
-[ext_resource type="Script" path="res://components/movement/walk_component.gd" id="15_walk"]
-[ext_resource type="Script" path="res://components/movement/jump_component.gd" id="16_jump"]
-[ext_resource type="Script" path="res://components/movement/dash_component.gd" id="17_dash"]
+[ext_resource type="Script" uid="uid://tri7w42utgm8" path="res://components/holder/holder_component.gd" id="12_48m5d"]
+[ext_resource type="Script" uid="uid://biyrckcem0i53" path="res://components/locomotion/locomotion_component.gd" id="13_loco"]
+[ext_resource type="Script" uid="uid://c32yt13twoygo" path="res://components/movement/gravity_component.gd" id="14_grav"]
+[ext_resource type="Script" uid="uid://cqaq7nvdoc6ks" path="res://components/movement/walk_component.gd" id="15_walk"]
+[ext_resource type="Script" uid="uid://co0sh26hvd7gk" path="res://components/movement/jump_component.gd" id="16_jump"]
+[ext_resource type="Script" uid="uid://bnw3x6u70l58m" path="res://components/movement/dash_component.gd" id="17_dash"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lwucn"]
 radius = 6.0
@@ -214,12 +214,11 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.863248, 0.0726496)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "input", "hand", "camera", "walk", "jump", "dash", "gravity") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=1356557048 node_paths=PackedStringArray("input", "hand", "camera", "walk", "jump", "dash", "gravity", "sprite") groups=["Player"]]
 scale = Vector2(0.5, 0.5)
 collision_layer = 2
 collision_mask = 127
 script = ExtResource("1_wkyp0")
-sprite = NodePath("PlayerSprite")
 input = NodePath("InputComponent")
 hand = NodePath("Hand")
 camera = NodePath("CameraFollow")
@@ -227,99 +226,100 @@ walk = NodePath("Locomotion/Walk")
 jump = NodePath("Locomotion/Jump")
 dash = NodePath("Locomotion/Dash")
 gravity = NodePath("Locomotion/Gravity")
+sprite = NodePath("PlayerSprite")
 movement_stats = ExtResource("2_crh5y")
 
-[node name="PlayerBody" type="CollisionShape2D" parent="." groups=["Player"]]
+[node name="PlayerBody" type="CollisionShape2D" parent="." unique_id=28719151 groups=["Player"]]
 position = Vector2(0, -0.75)
 shape = SubResource("CapsuleShape2D_lwucn")
 debug_color = Color(0.86713, 0.322044, 0.392222, 0.42)
 
-[node name="PlayerSprite" type="AnimatedSprite2D" parent="." groups=["Player"]]
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=1360963272 groups=["Player"]]
 sprite_frames = SubResource("SpriteFrames_mxm4r")
 animation = &"Idle"
 
-[node name="ExplosionSprite" type="AnimatedSprite2D" parent="."]
+[node name="ExplosionSprite" type="AnimatedSprite2D" parent="." unique_id=98849276]
 visible = false
 position = Vector2(2.38419e-07, -2)
 scale = Vector2(0.3125, 0.3125)
 sprite_frames = SubResource("SpriteFrames_kny6y")
 animation = &"explode"
 
-[node name="Hitbox" type="Area2D" parent="." groups=["Player"]]
+[node name="Hitbox" type="Area2D" parent="." unique_id=1790832451 groups=["Player"]]
 collision_layer = 2
 collision_mask = 127
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" groups=["Player"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=943090255 groups=["Player"]]
 shape = SubResource("CapsuleShape2D_ai5n8")
 debug_color = Color(0, 0.6, 0.701961, 0.129412)
 
-[node name="InputComponent" parent="." instance=ExtResource("9_yvic6")]
+[node name="InputComponent" parent="." unique_id=236673276 instance=ExtResource("9_yvic6")]
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+[node name="StateMachine" type="Node" parent="." unique_id=2127670770 node_paths=PackedStringArray("starting_state")]
 script = ExtResource("3_kfjht")
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("move_state", "jump_state", "fall_state", "dash_state")]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=127365454 node_paths=PackedStringArray("move_state", "jump_state", "fall_state", "dash_state")]
 script = ExtResource("4_2w84y")
-state_name = "Idle"
 move_state = NodePath("../Move")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
 dash_state = NodePath("../Dash")
 animation_name = "Idle"
+state_name = "Idle"
 
-[node name="Move" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump_state", "fall_state", "idle_state", "dash_state")]
+[node name="Move" type="Node" parent="StateMachine" unique_id=54660215 node_paths=PackedStringArray("jump_state", "fall_state", "idle_state", "dash_state")]
 script = ExtResource("5_2oo8f")
-state_name = "Move"
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
 idle_state = NodePath("../Idle")
 dash_state = NodePath("../Dash")
 animation_name = "Walk"
+state_name = "Move"
 
-[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall_state", "jump_state", "dash_state")]
+[node name="Jump" type="Node" parent="StateMachine" unique_id=1213256166 node_paths=PackedStringArray("fall_state", "jump_state", "dash_state")]
 script = ExtResource("6_c3blf")
-state_name = "Jump"
 fall_state = NodePath("../Fall")
 jump_state = NodePath(".")
 dash_state = NodePath("../Dash")
 animation_name = "Jump"
+state_name = "Jump"
 
-[node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("move_state", "idle_state", "jump_state", "dash_state")]
+[node name="Fall" type="Node" parent="StateMachine" unique_id=484638570 node_paths=PackedStringArray("move_state", "idle_state", "jump_state", "dash_state")]
 script = ExtResource("7_y3686")
-state_name = "Fall"
 move_state = NodePath("../Move")
 idle_state = NodePath("../Idle")
 jump_state = NodePath("../Jump")
 dash_state = NodePath("../Dash")
 animation_name = "Fall"
+state_name = "Fall"
 
-[node name="Dash" type="Node" parent="StateMachine" node_paths=PackedStringArray("move_state", "idle_state", "fall_state")]
+[node name="Dash" type="Node" parent="StateMachine" unique_id=1307649760 node_paths=PackedStringArray("move_state", "idle_state", "fall_state")]
 script = ExtResource("7_i2536")
-state_name = "Dash"
 move_state = NodePath("../Move")
 idle_state = NodePath("../Idle")
 fall_state = NodePath("../Fall")
+state_name = "Dash"
 
-[node name="Locomotion" type="Node" parent="."]
+[node name="Locomotion" type="Node" parent="." unique_id=2030040502]
 script = ExtResource("13_loco")
 
-[node name="Gravity" type="Node" parent="Locomotion"]
+[node name="Gravity" type="Node" parent="Locomotion" unique_id=1000122043]
 script = ExtResource("14_grav")
 
-[node name="Walk" type="Node" parent="Locomotion"]
+[node name="Walk" type="Node" parent="Locomotion" unique_id=1978656268]
 script = ExtResource("15_walk")
 stats = ExtResource("2_crh5y")
 
-[node name="Jump" type="Node" parent="Locomotion"]
+[node name="Jump" type="Node" parent="Locomotion" unique_id=1601256536]
 script = ExtResource("16_jump")
 stats = ExtResource("2_crh5y")
 
-[node name="Dash" type="Node" parent="Locomotion"]
+[node name="Dash" type="Node" parent="Locomotion" unique_id=679507453]
 script = ExtResource("17_dash")
 stats = ExtResource("2_crh5y")
 
-[node name="CameraFollow" type="Camera2D" parent="."]
+[node name="CameraFollow" type="Camera2D" parent="." unique_id=465325154]
 zoom = Vector2(1.2, 1.2)
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
@@ -330,13 +330,13 @@ drag_left_margin = 0.5
 drag_top_margin = 0.5
 drag_bottom_margin = 0.34
 
-[node name="Hand" type="Node2D" parent="." node_paths=PackedStringArray("body")]
+[node name="Hand" type="Node2D" parent="." unique_id=1492119501 node_paths=PackedStringArray("body")]
 z_index = 2
 position = Vector2(10, -2)
 script = ExtResource("12_48m5d")
 body = NodePath("..")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1204571652]
 position = Vector2(0, 5.68434e-14)
 scale = Vector2(1.65625, 1.5625)
 energy = 1.4

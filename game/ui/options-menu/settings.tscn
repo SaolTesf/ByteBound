@@ -113,6 +113,3 @@ theme_override_colors/font_outline_color = Color(1, 0.775167, 0.29, 1)
 theme_override_constants/outline_size = 10
 text = "Go Back
 "
-
-[connection signal="value_changed" from="Panel/HBoxContainer/VBoxContainer/SettingsContainer/SliderContainer/SFX" to="Panel" method="_on_sfx_value_changed"]
-[connection signal="value_changed" from="Panel/HBoxContainer/VBoxContainer/SettingsContainer/SliderContainer/BGM" to="Panel" method="_on_bgm_value_changed"]
