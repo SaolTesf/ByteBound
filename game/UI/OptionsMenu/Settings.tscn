@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bjo6wrwi3ucpp"]
+[gd_scene format=3 uid="uid://bjo6wrwi3ucpp"]
 
 [ext_resource type="Script" uid="uid://gwtcyikkgkeo" path="res://UI/OptionsMenu/Settings.gd" id="2_6su7d"]
 [ext_resource type="Theme" uid="uid://cjrb4f2yj7vjw" path="res://UI/MainMenu/MainMenuTheme.tres" id="2_hf7g0"]
-[ext_resource type="LabelSettings" uid="uid://baonky01jfi24" path="res://Font/Label.tres" id="3_4nthg"]
+[ext_resource type="LabelSettings" uid="uid://baonky01jfi24" path="res://Assets/Font/Label.tres" id="3_4nthg"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_47rsq"]
 

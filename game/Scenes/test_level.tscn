@@ -1,10 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://cnvqs74bujyhb"]
+[gd_scene format=4 uid="uid://cnvqs74bujyhb"]
 
 [ext_resource type="PackedScene" uid="uid://dj33b6ynfouwy" path="res://Scenes/Level_Template.tscn" id="1_el2di"]
-[ext_resource type="PackedScene" uid="uid://biuxaol52s4r8" path="res://Scripts/Objects/Buttons/PressurePlates/BluePressurePlate/BluePressurePlate.tscn" id="2_14mmr"]
-[ext_resource type="PackedScene" uid="uid://36pkp13b1yer" path="res://Scripts/Objects/Platforms/Oneway/OneWayPlatform.tscn" id="2_xnktr"]
-[ext_resource type="Script" path="res://Scripts/Components/Movement/move_stats.gd" id="4_em7nr"]
-[ext_resource type="PackedScene" uid="uid://bbnivbfgvtu3c" path="res://Scripts/Actors/Enemy/Enemy.tscn" id="4_j1gdk"]
+[ext_resource type="PackedScene" uid="uid://biuxaol52s4r8" path="res://Entites/Objects/Buttons/PressurePlates/BluePressurePlate/BluePressurePlate.tscn" id="2_14mmr"]
+[ext_resource type="PackedScene" uid="uid://36pkp13b1yer" path="res://Entites/Objects/Platforms/Oneway/OneWayPlatform.tscn" id="2_xnktr"]
+[ext_resource type="Script" uid="uid://krgx50cxctd0" path="res://Components/Movement/move_stats.gd" id="4_em7nr"]
+[ext_resource type="PackedScene" uid="uid://bbnivbfgvtu3c" path="res://Entites/Enemy/Enemy.tscn" id="4_j1gdk"]
 
 [sub_resource type="Resource" id="Resource_jf31o"]
 resource_local_to_scene = true

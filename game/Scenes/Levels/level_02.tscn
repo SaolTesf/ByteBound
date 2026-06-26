@@ -1,13 +1,13 @@
-[gd_scene load_steps=16 format=4 uid="uid://8elis6novije"]
+[gd_scene format=4 uid="uid://8elis6novije"]
 
 [ext_resource type="PackedScene" uid="uid://dj33b6ynfouwy" path="res://Scenes/Level_Template.tscn" id="1_o5jq7"]
-[ext_resource type="PackedScene" uid="uid://bbnivbfgvtu3c" path="res://Scripts/Actors/Enemy/Enemy.tscn" id="2_68i68"]
-[ext_resource type="PackedScene" uid="uid://bbgh8q32oohdc" path="res://Scripts/Objects/Hazards/Lazers/BlueLazer/BlueLazer.tscn" id="2_j63i3"]
-[ext_resource type="PackedScene" uid="uid://36pkp13b1yer" path="res://Scripts/Objects/Platforms/Oneway/OneWayPlatform.tscn" id="2_wjsu7"]
-[ext_resource type="Script" path="res://Scripts/Components/Movement/move_stats.gd" id="3_6a3gq"]
-[ext_resource type="PackedScene" uid="uid://biuxaol52s4r8" path="res://Scripts/Objects/Buttons/PressurePlates/BluePressurePlate/BluePressurePlate.tscn" id="4_v3488"]
-[ext_resource type="PackedScene" uid="uid://b5awsjbb8w6pi" path="res://Scripts/Objects/ThrowableObjects/ThrowableObject.tscn" id="5_8cjt7"]
-[ext_resource type="PackedScene" uid="uid://1qa8vshk26o3" path="res://Scripts/Objects/Hazards/Lazers/RedLaser/RedLazer.tscn" id="5_mx5gu"]
+[ext_resource type="PackedScene" uid="uid://bbnivbfgvtu3c" path="res://Entites/Enemy/Enemy.tscn" id="2_68i68"]
+[ext_resource type="PackedScene" uid="uid://bbgh8q32oohdc" path="res://Entites/Objects/Hazards/Lazers/BlueLazer/BlueLazer.tscn" id="2_j63i3"]
+[ext_resource type="PackedScene" uid="uid://36pkp13b1yer" path="res://Entites/Objects/Platforms/Oneway/OneWayPlatform.tscn" id="2_wjsu7"]
+[ext_resource type="Script" uid="uid://krgx50cxctd0" path="res://Components/Movement/move_stats.gd" id="3_6a3gq"]
+[ext_resource type="PackedScene" uid="uid://biuxaol52s4r8" path="res://Entites/Objects/Buttons/PressurePlates/BluePressurePlate/BluePressurePlate.tscn" id="4_v3488"]
+[ext_resource type="PackedScene" uid="uid://b5awsjbb8w6pi" path="res://Entites/Objects/ThrowableObjects/ThrowableObject.tscn" id="5_8cjt7"]
+[ext_resource type="PackedScene" uid="uid://1qa8vshk26o3" path="res://Entites/Objects/Hazards/Lazers/RedLaser/RedLazer.tscn" id="5_mx5gu"]
 
 [sub_resource type="Resource" id="Resource_hxb07"]
 resource_local_to_scene = true

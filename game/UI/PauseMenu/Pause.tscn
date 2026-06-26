@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dds57a87tgua8"]
+[gd_scene format=3 uid="uid://dds57a87tgua8"]
 
-[ext_resource type="Script" path="res://Scripts/UI/Pause.gd" id="1_4gtah"]
+[ext_resource type="Script" uid="uid://bsc5kbai7gcps" path="res://Scripts/UI/Pause.gd" id="1_4gtah"]
 [ext_resource type="Theme" uid="uid://cjrb4f2yj7vjw" path="res://UI/MainMenu/MainMenuTheme.tres" id="2_i1uko"]
-[ext_resource type="LabelSettings" uid="uid://baonky01jfi24" path="res://Font/Label.tres" id="3_owbh0"]
+[ext_resource type="LabelSettings" uid="uid://baonky01jfi24" path="res://Assets/Font/Label.tres" id="3_owbh0"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3

@@ -1,12 +1,12 @@
-[gd_scene load_steps=13 format=4 uid="uid://dgdwyprak6g4r"]
+[gd_scene format=4 uid="uid://dgdwyprak6g4r"]
 
 [ext_resource type="PackedScene" uid="uid://dj33b6ynfouwy" path="res://Scenes/Level_Template.tscn" id="1_jhief"]
-[ext_resource type="Script" path="res://Scenes/Levels/Tutorials/box_tutorial.gd" id="2_ggn68"]
-[ext_resource type="LabelSettings" uid="uid://c2oiwjha5g1c6" path="res://Font/TutortialText.tres" id="3_g7mvi"]
-[ext_resource type="PackedScene" uid="uid://dveonqmfkatdx" path="res://Scripts/Objects/MovableSquare/MovableSquare.tscn" id="3_o5i6x"]
-[ext_resource type="PackedScene" uid="uid://bbnivbfgvtu3c" path="res://Scripts/Actors/Enemy/Enemy.tscn" id="4_5jsd5"]
-[ext_resource type="Script" path="res://Scripts/Components/Movement/move_stats.gd" id="5_w6yo4"]
-[ext_resource type="PackedScene" uid="uid://36pkp13b1yer" path="res://Scripts/Objects/Platforms/Oneway/OneWayPlatform.tscn" id="6_1ry74"]
+[ext_resource type="Script" uid="uid://c5da1lsfmggxl" path="res://Scenes/Levels/Tutorials/box_tutorial.gd" id="2_ggn68"]
+[ext_resource type="LabelSettings" uid="uid://c2oiwjha5g1c6" path="res://Assets/Font/TutortialText.tres" id="3_g7mvi"]
+[ext_resource type="PackedScene" uid="uid://dveonqmfkatdx" path="res://Entites/Objects/MovableSquare/MovableSquare.tscn" id="3_o5i6x"]
+[ext_resource type="PackedScene" uid="uid://bbnivbfgvtu3c" path="res://Entites/Enemy/Enemy.tscn" id="4_5jsd5"]
+[ext_resource type="Script" uid="uid://krgx50cxctd0" path="res://Components/Movement/move_stats.gd" id="5_w6yo4"]
+[ext_resource type="PackedScene" uid="uid://36pkp13b1yer" path="res://Entites/Objects/Platforms/Oneway/OneWayPlatform.tscn" id="6_1ry74"]
 
 [sub_resource type="Resource" id="Resource_70ur5"]
 resource_local_to_scene = true

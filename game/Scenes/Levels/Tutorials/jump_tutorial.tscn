@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=4 uid="uid://cyp10gpo2ujqo"]
+[gd_scene format=4 uid="uid://cyp10gpo2ujqo"]
 
 [ext_resource type="PackedScene" uid="uid://dj33b6ynfouwy" path="res://Scenes/Level_Template.tscn" id="1_fde0d"]
-[ext_resource type="PackedScene" uid="uid://36pkp13b1yer" path="res://Scripts/Objects/Platforms/Oneway/OneWayPlatform.tscn" id="2_qvyih"]
-[ext_resource type="LabelSettings" uid="uid://c2oiwjha5g1c6" path="res://Font/TutortialText.tres" id="3_shsjw"]
-[ext_resource type="Script" path="res://Scenes/Levels/Tutorials/tutorial_text.gd" id="3_svdo4"]
+[ext_resource type="PackedScene" uid="uid://36pkp13b1yer" path="res://Entites/Objects/Platforms/Oneway/OneWayPlatform.tscn" id="2_qvyih"]
+[ext_resource type="LabelSettings" uid="uid://c2oiwjha5g1c6" path="res://Assets/Font/TutortialText.tres" id="3_shsjw"]
+[ext_resource type="Script" uid="uid://cpq7ux537wjyc" path="res://Scenes/Levels/Tutorials/tutorial_text.gd" id="3_svdo4"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dpsou"]
 polygon = PackedVector2Array(-32, 320, 720, 320, 720, -48, -32, -48, -32, -128, 896, -128, 896, 384, -128, 384, -128, -128, -32, -128)

@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=4 uid="uid://dx4o4jjxn55ai"]
+[gd_scene format=4 uid="uid://dx4o4jjxn55ai"]
 
 [ext_resource type="PackedScene" uid="uid://dj33b6ynfouwy" path="res://Scenes/Level_Template.tscn" id="1_thgdx"]
-[ext_resource type="PackedScene" uid="uid://1qa8vshk26o3" path="res://Scripts/Objects/Hazards/Lazers/RedLaser/RedLazer.tscn" id="2_44ftb"]
-[ext_resource type="Script" path="res://Scenes/Levels/Tutorials/tutorial_text.gd" id="3_1kfuk"]
-[ext_resource type="LabelSettings" uid="uid://c2oiwjha5g1c6" path="res://Font/TutortialText.tres" id="3_gd3fm"]
+[ext_resource type="PackedScene" uid="uid://1qa8vshk26o3" path="res://Entites/Objects/Hazards/Lazers/RedLaser/RedLazer.tscn" id="2_44ftb"]
+[ext_resource type="Script" uid="uid://cpq7ux537wjyc" path="res://Scenes/Levels/Tutorials/tutorial_text.gd" id="3_1kfuk"]
+[ext_resource type="LabelSettings" uid="uid://c2oiwjha5g1c6" path="res://Assets/Font/TutortialText.tres" id="3_gd3fm"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6f1oy"]
 polygon = PackedVector2Array(152, 320, 152, 320, -57, 320, -56, 0, 776, 0, 777, 320, 536, 320, 536, 416, 1000, 416, 1000, -176, -344, -176, -344, 416, 152, 416)

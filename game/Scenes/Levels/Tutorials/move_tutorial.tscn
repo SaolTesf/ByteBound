@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=4 uid="uid://6oxfgr0cvgwd"]
+[gd_scene format=4 uid="uid://6oxfgr0cvgwd"]
 
 [ext_resource type="PackedScene" uid="uid://dj33b6ynfouwy" path="res://Scenes/Level_Template.tscn" id="1_t3vcj"]
-[ext_resource type="Script" path="res://Scenes/Levels/Tutorials/tutorial_text.gd" id="2_0th6p"]
-[ext_resource type="LabelSettings" uid="uid://c2oiwjha5g1c6" path="res://Font/TutortialText.tres" id="3_p1k3i"]
+[ext_resource type="Script" uid="uid://cpq7ux537wjyc" path="res://Scenes/Levels/Tutorials/tutorial_text.gd" id="2_0th6p"]
+[ext_resource type="LabelSettings" uid="uid://c2oiwjha5g1c6" path="res://Assets/Font/TutortialText.tres" id="3_p1k3i"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7p0ws"]
 polygon = PackedVector2Array(-160, 288, 61.7003, 288, 352, 288, 352, 16, -160, 16, -160, -80, 448, -80, 448, 400, -304, 400, -304, -80, -160, -80, -160, 16)

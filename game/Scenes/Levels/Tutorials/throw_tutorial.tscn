@@ -1,11 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://yq8xvmnudp37"]
+[gd_scene format=4 uid="uid://yq8xvmnudp37"]
 
 [ext_resource type="PackedScene" uid="uid://dj33b6ynfouwy" path="res://Scenes/Level_Template.tscn" id="1_tp3ig"]
-[ext_resource type="Script" path="res://Scenes/Levels/Tutorials/throw_tutorial.gd" id="2_3phd5"]
-[ext_resource type="LabelSettings" uid="uid://c2oiwjha5g1c6" path="res://Font/TutortialText.tres" id="3_5l7xa"]
-[ext_resource type="PackedScene" uid="uid://b5awsjbb8w6pi" path="res://Scripts/Objects/ThrowableObjects/ThrowableObject.tscn" id="3_ox7w2"]
-[ext_resource type="PackedScene" uid="uid://biuxaol52s4r8" path="res://Scripts/Objects/Buttons/PressurePlates/BluePressurePlate/BluePressurePlate.tscn" id="4_sbsd2"]
-[ext_resource type="PackedScene" uid="uid://deuxlw8xiqjyq" path="res://Scripts/Objects/Doors/TrapDoors/BlueTrapDoor/BlueTrapDoor.tscn" id="4_t25x1"]
+[ext_resource type="Script" uid="uid://ddkdf06gd06po" path="res://Scenes/Levels/Tutorials/throw_tutorial.gd" id="2_3phd5"]
+[ext_resource type="LabelSettings" uid="uid://c2oiwjha5g1c6" path="res://Assets/Font/TutortialText.tres" id="3_5l7xa"]
+[ext_resource type="PackedScene" uid="uid://b5awsjbb8w6pi" path="res://Entites/Objects/ThrowableObjects/ThrowableObject.tscn" id="3_ox7w2"]
+[ext_resource type="PackedScene" uid="uid://biuxaol52s4r8" path="res://Entites/Objects/Buttons/PressurePlates/BluePressurePlate/BluePressurePlate.tscn" id="4_sbsd2"]
+[ext_resource type="PackedScene" uid="uid://deuxlw8xiqjyq" path="res://Entites/Objects/Doors/TrapDoors/BlueTrapDoor/BlueTrapDoor.tscn" id="4_t25x1"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_su13q"]
 polygon = PackedVector2Array(-160, 432, -152, -160, 928, -160, 928, 432, -16, 432, -16, 288, 560, 288, 560, 160, 544, 160, 544, 96, 464, 96, 464, 160, 448, 160, 448, 16, -16, 16, -16, 432)

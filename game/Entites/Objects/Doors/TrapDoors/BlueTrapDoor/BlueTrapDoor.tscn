@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://deuxlw8xiqjyq"]
+
+[ext_resource type="Script" uid="uid://cc0tlnev5ewvm" path="res://Entites/Objects/Doors/TrapDoors/BlueTrapDoor/BlueTrapDoor.gd" id="1_qh6bo"]
+[ext_resource type="Texture2D" uid="uid://chgy02it3f37k" path="res://Assets/Objects/Barriers/BlueTrapDoor/BlueTrapDoor1.png" id="1_r3d1b"]
+[ext_resource type="Texture2D" uid="uid://d0mkk16u1tbnn" path="res://Assets/Objects/Barriers/BlueTrapDoor/BlueTrapDoor2.png" id="2_6tyxw"]
+[ext_resource type="Texture2D" uid="uid://dinesyb7puru5" path="res://Assets/Objects/Barriers/BlueTrapDoor/BlueTrapDoor3.png" id="3_crpfj"]
+[ext_resource type="Texture2D" uid="uid://bra6wgctb1eyv" path="res://Assets/Objects/Barriers/BlueTrapDoor/BlueTrapDoor4.png" id="4_kx7hc"]
+[ext_resource type="Texture2D" uid="uid://bmyujg18r0c1c" path="res://Assets/Objects/Barriers/BlueTrapDoor/BlueTrapDoor5.png" id="5_lu4ax"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dl13c"]
+size = Vector2(32, 3)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mxj7l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_r3d1b")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_r3d1b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_6tyxw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_crpfj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_kx7hc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_lu4ax")
+}],
+"loop": false,
+"name": &"Open",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_lu4ax")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_kx7hc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_crpfj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_6tyxw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_r3d1b")
+}],
+"loop": false,
+"name": &"Shut",
+"speed": 5.0
+}]
+
+[node name="BlueTrapDoor" type="StaticBody2D"]
+script = ExtResource("1_qh6bo")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_dl13c")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 5)
+sprite_frames = SubResource("SpriteFrames_mxj7l")
+animation = &"Shut"
+frame = 4
+frame_progress = 1.0

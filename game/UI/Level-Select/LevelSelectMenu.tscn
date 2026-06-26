@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://pib5b0l1i6vf"]
+[gd_scene format=3 uid="uid://pib5b0l1i6vf"]
 
 [ext_resource type="Script" uid="uid://dedr5fa6yn25v" path="res://Scripts/UI/level_select.gd" id="1_d0of1"]
 [ext_resource type="Theme" uid="uid://cjrb4f2yj7vjw" path="res://UI/MainMenu/MainMenuTheme.tres" id="2_hf7g0"]
-[ext_resource type="LabelSettings" uid="uid://baonky01jfi24" path="res://Font/Label.tres" id="3_uipp2"]
+[ext_resource type="LabelSettings" uid="uid://baonky01jfi24" path="res://Assets/Font/Label.tres" id="3_uipp2"]
 
 [node name="LevelSelectMenu" type="Control"]
 layout_mode = 3
