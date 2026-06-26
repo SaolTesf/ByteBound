@@ -25,6 +25,7 @@ SignalHub="*res://autoloads/signal_hub.gd"
 SceneManager="*res://autoloads/scene_manager.gd"
 Debug="*res://autoloads/debug.gd"
 AudioController="*res://autoloads/audio_controller.tscn"
+AudioPool="*res://addons/audio-pool/autoloads/audio_pool.gd"
 
 [display]
 
