@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://fg1ssyfkux1g"
+path="res://.godot/imported/noon_intro_Percussion.wav-6d72004b83d81bdae2dde983e6736b85.sample"
+
+[deps]
+
+source_file="res://Audio/True 8-Bit Music/Noon/Intro/noon_intro_Percussion.wav"
+dest_files=["res://.godot/imported/noon_intro_Percussion.wav-6d72004b83d81bdae2dde983e6736b85.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

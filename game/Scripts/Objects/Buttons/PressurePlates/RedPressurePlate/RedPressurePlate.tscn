@@ -1,0 +1,89 @@
+[gd_scene load_steps=10 format=3 uid="uid://byocmdiv57esl"]
+
+[ext_resource type="Script" uid="uid://dibr4vl4k4tt4" path="res://Scripts/Objects/Buttons/PressurePlates/RedPressurePlate/RedPressurePlate.gd" id="1_twbif"]
+[ext_resource type="Texture2D" uid="uid://c6subjsrfhpdh" path="res://Assets/Objects/Buttons/RedPressurePlate/RedPressurePlate1.png" id="2_33imk"]
+[ext_resource type="Texture2D" uid="uid://dw4rkomypjg1a" path="res://Assets/Objects/Buttons/RedPressurePlate/RedPressurePlate2.png" id="3_8mqxr"]
+[ext_resource type="Texture2D" uid="uid://s1rdmt341f6t" path="res://Assets/Objects/Buttons/RedPressurePlate/RedPressurePlate3.png" id="4_ou6nt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8kjdl"]
+size = Vector2(5.61231, 2.66585)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s52gn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_33imk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_8mqxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ou6nt")
+}],
+"loop": false,
+"name": &"Activate",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ou6nt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_8mqxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_33imk")
+}],
+"loop": false,
+"name": &"Deactivate",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_33imk")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qtwxu"]
+polygon = PackedVector2Array(-4.01562, -0.03125, -3.96875, -0.96875, 0.015625, -2, 3.92188, -0.953125, 3.96875, -0.03125)
+
+[sub_resource type="Gradient" id="Gradient_4m4hw"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_205l1"]
+gradient = SubResource("Gradient_4m4hw")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="RedPressurePlate" type="Area2D" node_paths=PackedStringArray("light")]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_twbif")
+light = NodePath("PointLight2D")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.226917, -2.14677)
+shape = SubResource("RectangleShape2D_8kjdl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0.140308, -8.13785)
+sprite_frames = SubResource("SpriteFrames_s52gn")
+animation = &"Idle"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(3.15625, -2.875, 6.65625, -0.09375, -5.875, -0.0625, -3.125, -2.90625)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_qtwxu")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0.157661, -4.5461)
+scale = Vector2(0.346334, 0.172243)
+color = Color(1, 0.50764, 0.285314, 1)
+texture = SubResource("GradientTexture2D_205l1")

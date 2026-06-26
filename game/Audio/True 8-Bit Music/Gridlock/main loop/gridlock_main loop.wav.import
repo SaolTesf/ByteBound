@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d30g7wkne15v5"
+path="res://.godot/imported/gridlock_main loop.wav-5273a98d830bacc3e42a5dc5404e63fa.sample"
+
+[deps]
+
+source_file="res://Audio/True 8-Bit Music/Gridlock/main loop/gridlock_main loop.wav"
+dest_files=["res://.godot/imported/gridlock_main loop.wav-5273a98d830bacc3e42a5dc5404e63fa.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

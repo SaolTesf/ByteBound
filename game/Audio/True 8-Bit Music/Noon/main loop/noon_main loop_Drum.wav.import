@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b5yj6peg0youl"
+path="res://.godot/imported/noon_main loop_Drum.wav-f0e52d38b438a6d4fa74381ef5ca8c79.sample"
+
+[deps]
+
+source_file="res://Audio/True 8-Bit Music/Noon/main loop/noon_main loop_Drum.wav"
+dest_files=["res://.godot/imported/noon_main loop_Drum.wav-f0e52d38b438a6d4fa74381ef5ca8c79.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

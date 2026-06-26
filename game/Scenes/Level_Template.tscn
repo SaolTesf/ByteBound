@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://dj33b6ynfouwy"]
+
+[ext_resource type="Script" path="res://Scenes/level_template.gd" id="1_74oc5"]
+[ext_resource type="PackedScene" uid="uid://bw0ew7stacm2" path="res://Scripts/Actors/Player/Player.tscn" id="1_dpdov"]
+[ext_resource type="PackedScene" uid="uid://b6io5qp6db3l" path="res://Scripts/Objects/Doors/ExitDoor/ExitDoor.tscn" id="2_bov5a"]
+[ext_resource type="PackedScene" uid="uid://biddtthbbkyfa" path="res://Scripts/Objects/Key/Key.tscn" id="4_7o18d"]
+[ext_resource type="TileSet" uid="uid://tcqie33gwp1w" path="res://Assets/Terrain/TileSets/ShipTiles.tres" id="5_bgltd"]
+[ext_resource type="PackedScene" uid="uid://dducu000804tv" path="res://UI/Game-Overlay/GameOverlay.tscn" id="6_ppcfl"]
+[ext_resource type="PackedScene" uid="uid://dds57a87tgua8" path="res://UI/PauseMenu/Pause.tscn" id="7_24df4"]
+[ext_resource type="AudioStream" uid="uid://bjbliqrsglpmp" path="res://Audio/True 8-Bit Music/Streets/Streets Full Track.wav" id="7_o51ty"]
+
+[sub_resource type="Environment" id="Environment_2s6sk"]
+background_mode = 3
+background_energy_multiplier = 0.4
+tonemap_mode = 3
+tonemap_exposure = 0.2
+
+[node name="LevelTemplate" type="Node2D"]
+script = ExtResource("1_74oc5")
+
+[node name="ExitDoor" parent="." instance=ExtResource("2_bov5a")]
+position = Vector2(499, 58)
+scale = Vector2(2, 2)
+collision_layer = 16
+collision_mask = 2
+
+[node name="UI" type="Node" parent="."]
+
+[node name="PauseMenu" parent="UI" instance=ExtResource("7_24df4")]
+physics_interpolation_mode = 1
+
+[node name="CanvasLayer" parent="UI" instance=ExtResource("6_ppcfl")]
+offset = Vector2(5, 0)
+transform = Transform2D(1, 0, 0, 1, 5, 0)
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("7_o51ty")
+
+[node name="Terrain" type="Node" parent="."]
+
+[node name="GroundLayer" type="TileMapLayer" parent="Terrain"]
+z_index = 1
+tile_set = ExtResource("5_bgltd")
+
+[node name="Background" type="ColorRect" parent="Terrain"]
+z_index = -5
+custom_minimum_size = Vector2(1000, 1000)
+offset_left = -1078.0
+offset_top = -122.0
+offset_right = 2227.0
+offset_bottom = 878.0
+color = Color(0.355314, 0.355314, 0.355314, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Terrain"]
+environment = SubResource("Environment_2s6sk")
+
+[node name="Characters" type="Node" parent="."]
+
+[node name="Player" parent="Characters" instance=ExtResource("1_dpdov")]
+position = Vector2(49, 36)
+scale = Vector2(1.5, 1.5)
+
+[node name="Collectables" type="Node" parent="."]
+
+[node name="Key" parent="Collectables" instance=ExtResource("4_7o18d")]
+position = Vector2(287, 89)
+
+[node name="LightOccluders" type="Node" parent="."]

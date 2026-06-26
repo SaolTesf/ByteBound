@@ -1,0 +1,89 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3ggpjjansf68"]
+
+[ext_resource type="Script" uid="uid://wsd44g7abyld" path="res://Scripts/UI/WinScreen/winScene.gd" id="1_uns16"]
+[ext_resource type="Theme" uid="uid://cjrb4f2yj7vjw" path="res://UI/MainMenu/MainMenuTheme.tres" id="2_i6lk6"]
+[ext_resource type="LabelSettings" uid="uid://baonky01jfi24" path="res://Font/Label.tres" id="3_pj7bs"]
+
+[node name="Game_Won" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uns16")
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0.458824)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+alignment = 1
+
+[node name="TitleContainer" type="MarginContainer" parent="Panel/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_i6lk6")
+theme_override_constants/margin_top = 50
+
+[node name="Title" type="Label" parent="Panel/HBoxContainer/VBoxContainer/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 45
+text = "The Robot is 
+Free!
+"
+label_settings = ExtResource("3_pj7bs")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="ButtonContainer" type="MarginContainer" parent="Panel/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="VBox" type="VBoxContainer" parent="Panel/HBoxContainer/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="MainMenu" type="Button" parent="Panel/HBoxContainer/VBoxContainer/ButtonContainer/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_i6lk6")
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.141176, 0.827451, 0.192157, 1)
+theme_override_constants/outline_size = 10
+text = "Main Menu
+"
+
+[node name="Quit" type="Button" parent="Panel/HBoxContainer/VBoxContainer/ButtonContainer/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_i6lk6")
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0.775167, 0.29, 1)
+theme_override_constants/outline_size = 10
+text = "Quit
+"

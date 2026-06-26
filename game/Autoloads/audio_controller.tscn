@@ -1,0 +1,46 @@
+[gd_scene load_steps=10 format=3 uid="uid://cnwaro2tyjs8h"]
+
+[ext_resource type="Script" path="res://Autoloads/AudioManager.gd" id="1_1hk6m"]
+[ext_resource type="AudioStream" uid="uid://bjbliqrsglpmp" path="res://Audio/True 8-Bit Music/Streets/Streets Full Track.wav" id="2_tmqy7"]
+[ext_resource type="AudioStream" uid="uid://dtun8ph7ir3p3" path="res://Audio/LaserField.wav" id="3_im3yq"]
+[ext_resource type="AudioStream" uid="uid://kbuq1jxcu6qj" path="res://Audio/PlayerJump.wav" id="4_fjyhq"]
+[ext_resource type="AudioStream" uid="uid://cgmykoh4xbha2" path="res://Audio/CardCollect.wav" id="5_jdeuy"]
+[ext_resource type="AudioStream" uid="uid://byt1dygndmse1" path="res://Audio/Interactable_Button.wav" id="6_hhlvl"]
+[ext_resource type="AudioStream" uid="uid://dl2mkmn401o8r" path="res://Audio/Interactable_Plate.wav" id="7_p361f"]
+[ext_resource type="AudioStream" uid="uid://cppxm8tnt0k5b" path="res://Audio/EnemyDetect.wav" id="8_4fg7f"]
+[ext_resource type="AudioStream" uid="uid://dd8l0to6jlph1" path="res://Audio/LaserHit.wav" id="9_uw24f"]
+
+[node name="AudioController" type="Node2D"]
+script = ExtResource("1_1hk6m")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_tmqy7")
+bus = &"BGM"
+
+[node name="LaserField" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_im3yq")
+bus = &"SFX"
+
+[node name="PlayerJump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_fjyhq")
+bus = &"SFX"
+
+[node name="CardCollect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_jdeuy")
+bus = &"SFX"
+
+[node name="ButtonInteract" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_hhlvl")
+bus = &"SFX"
+
+[node name="PlateStepped" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_p361f")
+bus = &"SFX"
+
+[node name="EnemyDetect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_4fg7f")
+bus = &"SFX"
+
+[node name="LaserCollision" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_uw24f")
+bus = &"SFX"

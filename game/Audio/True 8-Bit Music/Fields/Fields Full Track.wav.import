@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://metot2vts3q8"
+path="res://.godot/imported/Fields Full Track.wav-3f318b27db6297a3d5633dcabe7408e6.sample"
+
+[deps]
+
+source_file="res://Audio/True 8-Bit Music/Fields/Fields Full Track.wav"
+dest_files=["res://.godot/imported/Fields Full Track.wav-3f318b27db6297a3d5633dcabe7408e6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
