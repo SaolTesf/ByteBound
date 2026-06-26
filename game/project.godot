@@ -25,7 +25,6 @@ SignalHub="*res://autoloads/signal_hub.gd"
 SceneManager="*res://autoloads/scene_manager.gd"
 Globals="*res://autoloads/globals.gd"
 Debug="*res://autoloads/debug.gd"
-Validate="*res://autoloads/validation.gd"
 AudioController="*res://autoloads/audio_controller.tscn"
 
 [display]

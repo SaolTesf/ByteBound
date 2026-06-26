@@ -11,11 +11,12 @@ size = Vector2(28, 16)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7c310"]
 polygon = PackedVector2Array(-13, -7, -12, -7, -12, -8, 12, -8, 12, -7, 13, -7, 13, 7, 12, 7, 12, 8, -12, 8, -12, 7, -13, 7)
 
-[node name="KeyBody" type="CharacterBody2D"]
+[node name="KeyBody" type="CharacterBody2D" node_paths=PackedStringArray("grav_comp")]
 position = Vector2(-1, 0)
 collision_layer = 128
 collision_mask = 3
 script = ExtResource("1_p7i6w")
+grav_comp = NodePath("GravityComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_f65xj")

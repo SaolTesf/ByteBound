@@ -15,8 +15,8 @@ var f_message_played : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visible = true
-	Validate.check_reference(self, "time", "Timer")
-	Validate.check_reference(self, "text", "TextEdit")
+	assert(message_timer, "BoxTutorial: message_timer not set")
+	assert(text, "BoxTutorial: text (Label) not set")
 	message_timer.timeout.connect(_on_timeout)
 	SignalHub.movable_box_hit.connect(_collide_boxes)
 

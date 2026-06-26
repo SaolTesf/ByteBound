@@ -31,12 +31,9 @@ func _ready() -> void:
 	if !self.is_in_group("Player"):
 		self.add_to_group("Player")
 		
-	# Set up the nodes
-	Validate.check_reference(self, "sprite", "PlayerSprite")
-	Validate.check_reference(self, "input", "InputComponent")
-	Validate.check_reference(self, "hand", "Hand")
-
-	# Initalize required nodes
+	# Required nodes (sprite + movement_stats are asserted by BaseCharacter).
+	assert(input, "Player: input (InputComponent) not set")
+	assert(hand, "Player: hand not set")
 	hand.init(self)
 	# Set up the signals
 	SignalHub.key_collected.connect(_on_key_collected)

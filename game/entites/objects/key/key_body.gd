@@ -5,8 +5,7 @@ var hitbox : Hitbox
 #var collectSound : AudioStreamPlayer2D
 
 func _ready() -> void:
-	Validate.check_reference(self, "grav_comp", "GravityComponent")
-	assert(grav_comp != null, "ERROR/Key: GravityComponent not set")
+	assert(grav_comp, "Key: grav_comp (GravityComponent) not set")
 
 	hitbox = find_child("HitBox")
 	assert(hitbox != null, "ERROR/Key: Area2D not set")

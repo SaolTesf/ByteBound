@@ -10,8 +10,8 @@ var in_range : bool = false
 @export var player: Player
 
 func _ready():
-	Validate.check_reference(self, "hitbox", "HitBox")
-	Validate.check_reference(self, "collision", "CollisionShape2D")
+	assert(hitbox, "Throwable: hitbox not set")
+	assert(collision, "Throwable: collision (CollisionShape2D) not set")
 
 	hitbox.init()
 	hitbox.entered.connect(_on_hitbox_entered)
