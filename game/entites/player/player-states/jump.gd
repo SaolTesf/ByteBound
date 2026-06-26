@@ -1,42 +1,32 @@
-class_name PlayerJump extends State
+class_name PlayerJump extends PlayerState
 ## JUMP STATE
 ##
-## The jump state can only enter 2 states itself for multi jumping and falling
-
+## Applies the jump impulse on entry. Can multi-jump (if enabled) or dash, and
+## transitions to fall once the player starts descending.
 
 @export_category("Transitions")
-@export var fall_state: State
-@export var jump_state: State
-@export var dash_state: State
+@export var fall_state: FSMState
+@export var jump_state: FSMState
+@export var dash_state: FSMState
 
 func enter() -> void:
-	super.enter()
-	#Debug.debug(self, "Player Entered the Jump State\nJumps Used: %d" % move_stats.jumps_used, false)
-	# Immediatly make the player jump.
-	move_stats.handle_jump(parent)
+	super()
+	move_stats.handle_jump(player)
 	AudioController.play_sound("PlayerJump")
-	parent.move_and_slide()
+	player.move_and_slide()
 
-	
-func process_input(_event: InputEvent) -> State:
-	# IF MULTI JUMP IS ALLOWED
-	if move_stats.multi_jump:
-		if move_stats.max_jumps > move_stats.jumps_used:
-			if get_jump_input():
-				return jump_state
-	
-	# Allow dashes while jumping
+func process_input(_event: InputEvent) -> FSMState:
+	if move_stats.multi_jump and move_stats.max_jumps > move_stats.jumps_used:
+		if get_jump_input():
+			return jump_state
 	if check_dash_conditions():
 		return dash_state
-	return
+	return null
 
-func process_physics(delta: float) -> State:
-	# HANDLE MOVING THE PLAYER AROUND
-	move_stats.handle_gravity(parent, get_fastfall_input(), delta)
-	move_stats.handle_horizontal_input(parent, input.input_horizontal, delta)
-	parent.move_and_slide()
-
-	# CHECK FOR STATE CHANGES
-	if parent.velocity.y > 0:
+func process_physics(delta: float) -> FSMState:
+	move_stats.handle_gravity(player, get_fastfall_input(), delta)
+	move_stats.handle_horizontal_input(player, input.input_horizontal, delta)
+	player.move_and_slide()
+	if player.velocity.y > 0:
 		return fall_state
 	return null

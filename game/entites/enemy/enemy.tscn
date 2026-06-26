@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://krgx50cxctd0" path="res://custom-resources/move_stats.gd" id="2_6e87y"]
 [ext_resource type="Texture2D" uid="uid://c8gexo4j6yuai" path="res://Assets/Sprites/Enemy_Spritesheet.png" id="3_7k8h2"]
 [ext_resource type="Script" uid="uid://yl4i15swrqs6" path="res://components/hit-box/hitbox.gd" id="3_w6xml"]
-[ext_resource type="PackedScene" uid="uid://be3m0wqdotsaq" path="res://components/state-machine/state_machine.tscn" id="5_qi620"]
+[ext_resource type="Script" uid="uid://eibvlqug7l7x" path="res://addons/StateMachine/scripts/state_machine_2d.gd" id="5_qi620"]
 [ext_resource type="Script" uid="uid://cd2dfpkyxciss" path="res://entites/enemy/enemy-states/idle.gd" id="6_encld"]
 [ext_resource type="Script" uid="uid://bylojrmngsi6j" path="res://entites/enemy/enemy-states/patrol.gd" id="6_la3kd"]
 [ext_resource type="PackedScene" uid="uid://yn8mnupom0tf" path="res://components/gravity/gravity_component.tscn" id="8_fifas"]
@@ -94,11 +94,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "sprite", "hitbox", "fov")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "hitbox", "fov")]
 collision_layer = 4
 collision_mask = 35
 script = ExtResource("1_jji55")
-state_machine = NodePath("StateMachine")
 sprite = NodePath("AnimatedSprite2D")
 movement_stats = SubResource("Resource_5fr5x")
 hitbox = NodePath("Hitbox")
@@ -125,28 +124,33 @@ shape = SubResource("RectangleShape2D_4hpyq")
 sprite_frames = SubResource("SpriteFrames_pnrbr")
 animation = &"Idle"
 
-[node name="StateMachine" parent="." node_paths=PackedStringArray("inital_state") instance=ExtResource("5_qi620")]
-inital_state = NodePath("Idle")
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("5_qi620")
+starting_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("patrol", "idle", "chase")]
 script = ExtResource("6_encld")
+state_name = "Idle"
 patrol = NodePath("../Patrol")
 idle = NodePath(".")
 chase = NodePath("../Chase")
 
 [node name="Patrol" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "patrol", "chase")]
 script = ExtResource("6_la3kd")
+state_name = "Patrol"
 idle = NodePath("../Idle")
 patrol = NodePath(".")
 chase = NodePath("../Chase")
 
 [node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "look_around")]
 script = ExtResource("8_jt8rg")
+state_name = "Chase"
 idle = NodePath("../Idle")
 look_around = NodePath("../LookAround")
 
 [node name="LookAround" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "chase_state")]
 script = ExtResource("9_niyo1")
+state_name = "LookAround"
 idle_state = NodePath("../Idle")
 chase_state = NodePath("../Chase")
 

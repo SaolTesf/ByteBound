@@ -1,6 +1,5 @@
 class_name Player extends CharacterBody2D
 
-@export var state_controller: StateMachine
 @export var sprite: AnimatedSprite2D
 @export var input: InputComponent
 @export var hand : Node
@@ -34,11 +33,9 @@ func _ready() -> void:
 	# Set up the nodes
 	Validate.check_reference(self, "sprite", "PlayerSprite")
 	Validate.check_reference(self, "input", "InputComponent")
-	Validate.check_reference(self, "state_controller", "StateMachine")
 	Validate.check_reference(self, "hand", "Hand")
-	
+
 	# Initalize required nodes
-	state_controller.init(self, sprite, movement_stats, input)
 	hand.init(self)
 	# Set up the signals
 	SignalHub.key_collected.connect(_on_key_collected)
@@ -58,8 +55,7 @@ func _ready() -> void:
 	add_child(deathTimer) #create the timer child object
 	
 	
-func _physics_process(delta: float) -> void:
-	state_controller.process_physics(delta)
+func _physics_process(_delta: float) -> void:
 	sprite.flip_h = dir < 0
 
 	#Uncomment to enable pushing ridged bodys
@@ -74,17 +70,12 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	# this is the dash timer
 	dash_cooldown_check(delta)
-	state_controller.process_frame(delta)
 
 		
 
-func _input(event : InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	hand.update_direction(input)
 	update_dir()
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	state_controller.process_input(event)
 
 
 func _on_death_timer_timeout():

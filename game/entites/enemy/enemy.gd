@@ -1,6 +1,10 @@
 class_name Enemy extends CharacterBody2D
+## AI-controlled hazard that patrols, idles, and chases the player on sight.
+##
+## Movement and decisions are driven by the child FSM ([FSMachine2D]); this node
+## wires up its components and exposes the shared state the FSM states read
+## ([member dir], [member player_in_sight], [member player]).
 
-@export var state_machine: StateMachine
 @export var sprite: AnimatedSprite2D
 @export var movement_stats: MoveStats
 @export var hitbox: Hitbox
@@ -16,23 +20,11 @@ var player_in_sight: bool
 var original_color: Color = Color(1, 0.270588, 0, 1)
 var player: CharacterBody2D
 
-
 func _ready() -> void:
-	state_machine.init(self, sprite, movement_stats)
 	fov.init(self, num_segments, sight_angle, sight_distance)
 	hitbox.init(self)
 	dir = movement_stats.starting_dir
 
-	
-func _physics_process(delta: float) -> void:
-	state_machine.process_physics(delta)
+func _physics_process(_delta: float) -> void:
 	sprite.flip_h = dir < 0
 	fov.update(dir)
-
-	
-func _process(delta: float) -> void:
-	state_machine.process_frame(delta)
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	state_machine.process_input(event)

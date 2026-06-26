@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cx6grcbdlauol" path="res://Assets/Sprites/RobotPlayer.png" id="1_no2yp"]
 [ext_resource type="Script" uid="uid://bpu4bmomd6xst" path="res://entites/player/player.gd" id="1_wkyp0"]
 [ext_resource type="Resource" uid="uid://3y2cdy74dhsn" path="res://entites/player/player_move_stats.tres" id="2_crh5y"]
-[ext_resource type="Script" uid="uid://t4obrfos0bel" path="res://components/state-machine/state_machine.gd" id="3_kfjht"]
+[ext_resource type="Script" uid="uid://eibvlqug7l7x" path="res://addons/StateMachine/scripts/state_machine_2d.gd" id="3_kfjht"]
 [ext_resource type="Script" uid="uid://bch7e2haebkgc" path="res://entites/player/player-states/idle.gd" id="4_2w84y"]
 [ext_resource type="Texture2D" uid="uid://blrhqoy5rpvgq" path="res://Assets/Sprites/explosionSprite.png" id="4_uh4vi"]
 [ext_resource type="Script" uid="uid://b5rotlf0i0u4i" path="res://entites/player/player-states/move.gd" id="5_2oo8f"]
@@ -209,12 +209,11 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.863248, 0.0726496)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_controller", "sprite", "input", "hand", "camera") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "input", "hand", "camera") groups=["Player"]]
 scale = Vector2(0.5, 0.5)
 collision_layer = 2
 collision_mask = 127
 script = ExtResource("1_wkyp0")
-state_controller = NodePath("StateMachine")
 sprite = NodePath("PlayerSprite")
 input = NodePath("InputComponent")
 hand = NodePath("Hand")
@@ -247,12 +246,13 @@ debug_color = Color(0, 0.6, 0.701961, 0.129412)
 
 [node name="InputComponent" parent="." instance=ExtResource("9_yvic6")]
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("3_kfjht")
-inital_state = NodePath("Idle")
+starting_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("move_state", "jump_state", "fall_state", "dash_state")]
 script = ExtResource("4_2w84y")
+state_name = "Idle"
 move_state = NodePath("../Move")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
@@ -261,6 +261,7 @@ animation_name = "Idle"
 
 [node name="Move" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump_state", "fall_state", "idle_state", "dash_state")]
 script = ExtResource("5_2oo8f")
+state_name = "Move"
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
 idle_state = NodePath("../Idle")
@@ -269,6 +270,7 @@ animation_name = "Walk"
 
 [node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall_state", "jump_state", "dash_state")]
 script = ExtResource("6_c3blf")
+state_name = "Jump"
 fall_state = NodePath("../Fall")
 jump_state = NodePath(".")
 dash_state = NodePath("../Dash")
@@ -276,6 +278,7 @@ animation_name = "Jump"
 
 [node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("move_state", "idle_state", "jump_state", "dash_state")]
 script = ExtResource("7_y3686")
+state_name = "Fall"
 move_state = NodePath("../Move")
 idle_state = NodePath("../Idle")
 jump_state = NodePath("../Jump")
@@ -284,6 +287,7 @@ animation_name = "Fall"
 
 [node name="Dash" type="Node" parent="StateMachine" node_paths=PackedStringArray("move_state", "idle_state", "fall_state")]
 script = ExtResource("7_i2536")
+state_name = "Dash"
 move_state = NodePath("../Move")
 idle_state = NodePath("../Idle")
 fall_state = NodePath("../Fall")
