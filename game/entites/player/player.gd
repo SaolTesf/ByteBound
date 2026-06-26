@@ -1,10 +1,13 @@
-class_name Player extends CharacterBody2D
+class_name Player extends BaseCharacter
+## The player-controlled character.
+##
+## Extends [BaseCharacter] (sprite, movement stats, facing) and adds input, the
+## throw hand, the follow camera, object pushing, and death/respawn. Movement is
+## driven by the child FSM ([FSMachine2D]).
 
-@export var sprite: AnimatedSprite2D
 @export var input: InputComponent
 @export var hand : Node
 @export var camera : Camera2D
-@export var movement_stats: MoveStats
 @onready var player_sprite: AnimatedSprite2D = $PlayerSprite
 @onready var explosion_sprite: AnimatedSprite2D = $ExplosionSprite
 
@@ -15,8 +18,6 @@ var was_spoted : bool = false
 var throwable_in_range : bool = false
 var hands_free : bool = true
 
-var dir : int # Constantly updated based on input
-
 const PUSH_FORCE: float = 15.0
 const MIN_PUSH_FORCE: float = 1.0
 
@@ -26,6 +27,7 @@ var deathTimer = null
 
 # Builtins --------------------------------------------------------------------
 func _ready() -> void:
+	super._ready()
 	# Make sure the player is in the player group
 	if !self.is_in_group("Player"):
 		self.add_to_group("Player")
@@ -55,8 +57,8 @@ func _ready() -> void:
 	add_child(deathTimer) #create the timer child object
 	
 	
-func _physics_process(_delta: float) -> void:
-	sprite.flip_h = dir < 0
+func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
 
 	#Uncomment to enable pushing ridged bodys
 	for i in get_slide_collision_count():
