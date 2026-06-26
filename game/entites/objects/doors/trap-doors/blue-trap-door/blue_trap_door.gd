@@ -1,61 +1,50 @@
 class_name BlueTrapDoor extends StaticBody2D
+## A trap door that opens while its channel's pressure plate is held, then shuts
+## a moment after it is released.
+##
+## Thin coordinator: wires a [ChannelReceiverComponent] to the door's animation
+## and collision. Ignores pedestal activations (only pressure plates open it).
 
-var sprite: AnimatedSprite2D
-var collision: CollisionShape2D
+@export var receiver: ChannelReceiverComponent
+@export var sprite: AnimatedSprite2D
+@export var collision: CollisionShape2D
+
 var is_open: bool = false
 var is_transitioning: bool = false
 var door_timer: Timer
 
-func _ready():
-	sprite = get_node("AnimatedSprite2D")
-	assert(sprite != null, "ERROR/BlueTrapDoor: AnimatedSprite2D not set")
+func _ready() -> void:
 	sprite.play("Idle")
 	sprite.animation_finished.connect(_on_animation_finished)
-	
-	# Set up the collision object
-	collision = get_node("CollisionShape2D")
-	assert(collision != null, "ERROR/BlueTrapDoor: CollisionShape2D not set")
-	
-	# Setup the timer for delayed closing
 	door_timer = Timer.new()
 	door_timer.one_shot = true
 	add_child(door_timer)
 	door_timer.timeout.connect(_on_door_timer_timeout)
-	
-	# React to blue pressure plates via the shared signal.
-	SignalHub.pressure_plate_activated.connect(_on_pressure_plate_activated)
-	SignalHub.pressure_plate_deactivated.connect(_on_pressure_plate_deactivated)
+	receiver.activated.connect(_on_activated)
+	receiver.deactivated.connect(_on_deactivated)
 
-
-func _on_pressure_plate_activated(channel: Channel.Type) -> void:
-	if channel != Channel.Type.BLUE:
-		return
+func _on_activated(by_pedestal: bool) -> void:
+	if by_pedestal:
+		return  # only pressure plates open the trap door
 	if not is_open and not is_transitioning:
 		is_transitioning = true
 		sprite.play("Open")
-		# Cancel any pending close
 		door_timer.stop()
 
-func _on_pressure_plate_deactivated(channel: Channel.Type) -> void:
-	if channel != Channel.Type.BLUE:
-		return
+func _on_deactivated() -> void:
 	door_timer.start(1)
 
-func _on_door_timer_timeout():
-	Debug.debug(self, "TrapDoor Timer Timed out")
+func _on_door_timer_timeout() -> void:
 	if is_open and not is_transitioning:
-		Debug.debug(self, "TrapDoor Should be shutting")
 		is_transitioning = true
 		sprite.play("Shut")
 
-func _on_animation_finished():
+func _on_animation_finished() -> void:
 	if sprite.animation == "Open":
 		is_open = true
 		is_transitioning = false
 		collision.set_deferred("disabled", true)
-		Debug.debug(self, "Door opened, collision disabled")
 	elif sprite.animation == "Shut":
 		is_open = false
 		is_transitioning = false
 		collision.set_deferred("disabled", false)
-		Debug.debug(self, "Door closed, collision enabled")
