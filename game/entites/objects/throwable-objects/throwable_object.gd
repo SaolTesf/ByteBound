@@ -13,8 +13,10 @@ func _ready():
 	Validate.check_reference(self, "hitbox", "HitBox")
 	Validate.check_reference(self, "collision", "CollisionShape2D")
 
-	hitbox.init(self)
-	
+	hitbox.init()
+	hitbox.entered.connect(_on_hitbox_entered)
+	hitbox.exited.connect(_on_hitbox_exited)
+
 
 ## looks at the players input to see if they want to interact or throw
 func _input(event : InputEvent):
@@ -82,3 +84,15 @@ func throw():
 	var x_force = player.dir * 300
 	self.freeze = false
 	apply_impulse(Vector2(x_force, -300))
+
+
+## The throwable tracks the player directly via its own hitbox.
+func _on_hitbox_entered(body: Node2D) -> void:
+	if body is Player:
+		in_range = true
+		player = body as Player
+
+
+func _on_hitbox_exited(body: Node2D) -> void:
+	if body is Player:
+		in_range = false

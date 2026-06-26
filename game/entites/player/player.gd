@@ -15,7 +15,6 @@ var has_key: bool = false
 var was_spoted : bool = false
 
 # Control picking up object
-var throwable_in_range : bool = false
 var hands_free : bool = true
 
 const PUSH_FORCE: float = 15.0
@@ -45,9 +44,7 @@ func _ready() -> void:
 	# fov signals
 	#SignalHub.fov_entered.connect(_on_fov_entered)
 	
-	# hitbox signals
-	SignalHub.hitbox_entered.connect(_on_hitbox_entered)
-	SignalHub.hitbox_exited.connect(_on_hitbox_exited)
+	# The key and throwables manage their own hitboxes and raise their own signals.
 	
 	# setup death timers and states to handle respawn
 	deathTimer = Timer.new()
@@ -88,36 +85,13 @@ func _on_death_timer_timeout():
 # Signals --------------------------------------------------------------------
 func _on_key_collected() -> void:
 	has_key = true
-	Debug.debug(self, "Player Collected a Key\nHas Key: %s" % has_key, false)
+	AudioController.play_sound("CardCollect")
+	Debug.debug(self, "Player collected the key", false)
 
 # Death by fov is already handled by the fov component, so the player does
 # not connect to fov_entered itself.
 
 			
-## Determine which hitbox the player hit
-func _on_hitbox_entered(caller : Node2D, body : Node2D) -> void:
-	if body == self:
-		Debug.debug(self, "Player received hitbox signal from %s" % caller.name, false)
-		if caller is Key:
-			AudioController.play_sound("CardCollect")
-			Debug.debug(self, "Player Entered the hitbox of the key", false)
-			has_key = true
-			SignalHub.key_collected.emit()
-
-		if caller is Throwable:
-			throwable_in_range = true
-			caller.in_range = true
-			caller.player = self
-			Debug.debug(self, "Player Entered the hitbox of the throwable %s" % caller.in_range, false)
-				
-
-func _on_hitbox_exited(caller : Node2D, body : Node2D):
-	if body == self:
-		if caller is Throwable:
-			caller.in_range = false
-			throwable_in_range = false
-			Debug.debug(self, "Player Exited the hitbox of the throwable %s" % caller.in_range, false)
-
 func handleDeath():
 	if isDead:
 		return #stop it from running the program multiple times if it dies

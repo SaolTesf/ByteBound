@@ -10,7 +10,8 @@ func _ready() -> void:
 
 	hitbox = find_child("HitBox")
 	assert(hitbox != null, "ERROR/Key: Area2D not set")
-	hitbox.init(self)
+	hitbox.init()
+	hitbox.entered.connect(_on_hitbox_entered)
 
 	SignalHub.key_collected.connect(_on_key_collected)
 
@@ -21,6 +22,12 @@ func _ready() -> void:
 func _physics_process(delta : float) -> void:
 	grav_comp.physics_update(self, delta)
 	move_and_slide()
+
+
+## When the player enters the key's hitbox, broadcast that the key was collected.
+func _on_hitbox_entered(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+		SignalHub.key_collected.emit()
 
 
 ## What Happens when this object is collected?

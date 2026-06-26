@@ -1,59 +1,50 @@
 class_name Hitbox extends Area2D
-## A class that adds an area 2D for checks to its parent
+## A reusable detection area.
 ##
-## This Script will set up the shape of the colliion shape
-## Connect Signals for on bodyentered and on bodyexited
+## Reports bodies entering/leaving via the local [signal entered] / [signal exited]
+## signals; the owner connects and decides what to do. Holds no reference to its
+## owner. Configure the shape/size in the inspector, then call [method init] from
+## the owner's [method Node._ready].
+
+## Emitted when a body enters the hitbox.
+signal entered(body: Node2D)
+## Emitted when a body leaves the hitbox.
+signal exited(body: Node2D)
 
 @export_category("CollisionShape")
-@export var collision_shape : CollisionShape2D
-var parent : Node2D
+@export var collision_shape: CollisionShape2D
 @export_subgroup("shape")
-@export_enum("Circle", "Rectangle", "Capsule") var shape_type : int = 1
-@export var x : float = 10
-@export var y : float  = 10
+@export_enum("Circle", "Rectangle", "Capsule") var shape_type: int = 1
+@export var x: float = 10
+@export var y: float = 10
 
-
-func init(body : Node2D) -> void:
-	self.parent = body
-	setUpCollisionShape()
+## Builds the collision shape and starts reporting body enter/exit.
+func init() -> void:
+	if not collision_shape:
+		collision_shape = find_child("CollisionShape2D")
+	assert(collision_shape, "Hitbox: CollisionShape2D not set")
+	collision_shape.shape = _create_shape()
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 
-
-func _createShape():
-	match(shape_type):
+func _create_shape() -> Shape2D:
+	match shape_type:
 		0:
-			return CircleShape2D.new()
-		1:
-			return RectangleShape2D.new()
+			var circle := CircleShape2D.new()
+			circle.radius = x
+			return circle
 		2:
-			return CapsuleShape2D.new()
+			var capsule := CapsuleShape2D.new()
+			capsule.radius = x
+			capsule.height = y
+			return capsule
 		_:
-			Debug.debug(self, "No Shape was defined using the default RectangleShape2D", false)
-			Debug.log(self, "No Shape was defined using the default RectangleShape2D", true)
-			return RectangleShape2D.new()
+			var rect := RectangleShape2D.new()
+			rect.size = Vector2(x, y)
+			return rect
 
+func _on_body_entered(body: Node2D) -> void:
+	entered.emit(body)
 
-## Used to initalif fov:ize the collision shape and set the shape, size and color
-func setUpCollisionShape() -> void:
-	if not collision_shape:
-		collision_shape = find_child("CollisionShape2D")
-	assert(collision_shape != null, "Collision Shape not set")
-	var shape = _createShape()
-	match(shape_type):
-		0:
-			shape.radius = x
-		1:
-			shape.size = Vector2(x, y)
-		_: 
-			Debug.debug(self, "What Shape?")
-	collision_shape.shape = shape
-
-
-func _on_body_entered(body : Node2D) -> void:
-	#Debug.debug(self, "%s entered %s hitbox\nemiting Signal" % [body, self], false)
-	SignalHub.hitbox_entered.emit(parent, body)
-
-func _on_body_exited(body : Node2D) -> void:
-	#Debug.debug(self, "%s exited %s hitbox\nemiting Signal" % [body, self], false)
-	SignalHub.hitbox_exited.emit(parent, body)
+func _on_body_exited(body: Node2D) -> void:
+	exited.emit(body)

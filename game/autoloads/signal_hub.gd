@@ -5,18 +5,6 @@ extends Node
 ## and any interested node connects to it. Keep this limited to genuinely
 ## cross-cutting events; component-local events belong on the component itself.
 
-#region Hitbox
-## A body entered [param caller]'s hitbox. [param body] is what entered.
-signal hitbox_entered(caller: Node2D, body: Node2D)
-## A body left [param caller]'s hitbox.
-signal hitbox_exited(caller: Node2D, body: Node2D)
-#endregion
-
-#region Field of view
-signal fov_entered(body: Node2D)
-signal fov_exited(body: Node2D)
-#endregion
-
 #region Collectables
 ## The player collected the key; objects gated on the key (e.g. the exit door)
 ## react to this.

@@ -22,7 +22,7 @@ func _ready() -> void:
 	fov.init(num_segments, sight_angle, sight_distance)
 	fov.sighted.connect(_on_sighted)
 	fov.lost.connect(_on_lost)
-	hitbox.init(self)
+	hitbox.init()
 	dir = movement_stats.starting_dir
 
 func _physics_process(delta: float) -> void:
