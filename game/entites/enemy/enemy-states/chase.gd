@@ -1,8 +1,5 @@
 class_name EnemyChase extends EnemyState
-## CHASE STATE
-##
-## The enemy moves toward the sighted player and kills it on contact. When the
-## player is lost (or the chase timer ends) it transitions to look-around.
+## CHASE STATE — moves toward the sighted player and kills it on contact.
 
 @export var idle: FSMState
 @export var look_around: FSMState
@@ -21,12 +18,9 @@ func enter() -> void:
 func exit() -> void:
 	enemy.player_in_sight = false
 
-func process_physics(delta: float) -> FSMState:
+func process_physics(_delta: float) -> FSMState:
 	var to_player: Vector2 = enemy.player.global_position - enemy.global_position
-	var sign_dir: Vector2 = sign(to_player)
-	move_stats.handle_horizontal_input(enemy, sign_dir.x, delta)
-	move_stats.handle_gravity(enemy, false, delta)
-	enemy.move_and_slide()
+	walk.direction = signf(to_player.x)
 	for i in range(enemy.get_slide_collision_count()):
 		var col: Object = enemy.get_slide_collision(i).get_collider()
 		if col is Player:

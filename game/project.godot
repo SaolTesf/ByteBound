@@ -52,6 +52,7 @@ folder_colors={
 "res://Assets/Objects/Buttons/GreenPressurePlate/": "green",
 "res://Assets/Objects/Buttons/RedPedistal/": "red",
 "res://Assets/Objects/Buttons/RedPressurePlate/": "red",
+"res://addons/": "red",
 "res://autoloads/": "yellow",
 "res://components/": "green",
 "res://custom-resources/": "teal",
@@ -66,8 +67,7 @@ folder_colors={
 "res://entites/objects/hazards/lazers/green-laser/": "green",
 "res://entites/objects/hazards/lazers/red-laser/": "red",
 "res://scenes/": "purple",
-"res://ui/": "pink",
-"res://addons/": "red"
+"res://ui/": "pink"
 }
 
 [global_group]

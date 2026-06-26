@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bw2pv1awjtcs7" path="res://entites/objects/key/key_body.gd" id="1_p7i6w"]
 [ext_resource type="Texture2D" uid="uid://dqmdkvic37urm" path="res://Assets/Objects/KeyCard.png" id="2_f65xj"]
-[ext_resource type="PackedScene" uid="uid://yn8mnupom0tf" path="res://components/gravity/gravity_component.tscn" id="3_chiga"]
+[ext_resource type="Script" path="res://components/movement/gravity_component.gd" id="3_chiga"]
 [ext_resource type="PackedScene" uid="uid://t4ij3l5v76t" path="res://components/hit-box/hit_box.tscn" id="4_hl6ni"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qbgmn"]
@@ -25,7 +25,8 @@ texture = ExtResource("2_f65xj")
 shape = SubResource("RectangleShape2D_qbgmn")
 debug_color = Color(0.95171, 0.185773, 0.310269, 0.42)
 
-[node name="GravityComponent" parent="." instance=ExtResource("3_chiga")]
+[node name="GravityComponent" type="Node" parent="."]
+script = ExtResource("3_chiga")
 
 [node name="HitBox" parent="." instance=ExtResource("4_hl6ni")]
 collision_layer = 128

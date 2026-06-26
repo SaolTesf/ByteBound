@@ -1,8 +1,5 @@
 class_name PlayerIdle extends PlayerState
-## IDLE STATE
-##
-## The player is doing nothing. Any input that makes the player act transitions
-## out: jump/move/dash while on the floor, or fall when leaving the ground.
+## IDLE STATE — the player stands still; any action transitions out.
 
 @export_category("States")
 @export var move_state: FSMState
@@ -10,15 +7,13 @@ class_name PlayerIdle extends PlayerState
 @export var fall_state: FSMState
 @export var dash_state: FSMState
 
-## Coming to a stop resets the jump counter while grounded.
 func enter() -> void:
 	super()
-	if player.is_on_floor():
-		move_stats.jumps_used = 0
-	player.velocity = Vector2.ZERO
+	walk.direction = 0.0
+	player.velocity.x = 0.0
 
 func process_input(_event: InputEvent) -> FSMState:
-	if player.is_on_floor() and move_stats.max_jumps > move_stats.jumps_used:
+	if player.is_on_floor() and jump.can_jump():
 		if get_jump_input():
 			return jump_state
 		if get_movement_input():

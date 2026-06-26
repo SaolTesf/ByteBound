@@ -12,6 +12,11 @@
 [ext_resource type="Script" uid="uid://b84f3r6hx040m" path="res://entites/player/player-states/fall.gd" id="7_y3686"]
 [ext_resource type="PackedScene" uid="uid://ba0doa040rdwp" path="res://components/input/input_component.tscn" id="9_yvic6"]
 [ext_resource type="Script" uid="uid://bajir4v0vh6yv" path="res://entites/player/hand.gd" id="12_48m5d"]
+[ext_resource type="Script" path="res://components/locomotion/locomotion_component.gd" id="13_loco"]
+[ext_resource type="Script" path="res://components/movement/gravity_component.gd" id="14_grav"]
+[ext_resource type="Script" path="res://components/movement/walk_component.gd" id="15_walk"]
+[ext_resource type="Script" path="res://components/movement/jump_component.gd" id="16_jump"]
+[ext_resource type="Script" path="res://components/movement/dash_component.gd" id="17_dash"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lwucn"]
 radius = 6.0
@@ -209,7 +214,7 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.863248, 0.0726496)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "input", "hand", "camera") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "input", "hand", "camera", "walk", "jump", "dash", "gravity") groups=["Player"]]
 scale = Vector2(0.5, 0.5)
 collision_layer = 2
 collision_mask = 127
@@ -218,6 +223,10 @@ sprite = NodePath("PlayerSprite")
 input = NodePath("InputComponent")
 hand = NodePath("Hand")
 camera = NodePath("CameraFollow")
+walk = NodePath("Locomotion/Walk")
+jump = NodePath("Locomotion/Jump")
+dash = NodePath("Locomotion/Dash")
+gravity = NodePath("Locomotion/Gravity")
 movement_stats = ExtResource("2_crh5y")
 
 [node name="PlayerBody" type="CollisionShape2D" parent="." groups=["Player"]]
@@ -291,6 +300,24 @@ state_name = "Dash"
 move_state = NodePath("../Move")
 idle_state = NodePath("../Idle")
 fall_state = NodePath("../Fall")
+
+[node name="Locomotion" type="Node" parent="."]
+script = ExtResource("13_loco")
+
+[node name="Gravity" type="Node" parent="Locomotion"]
+script = ExtResource("14_grav")
+
+[node name="Walk" type="Node" parent="Locomotion"]
+script = ExtResource("15_walk")
+stats = ExtResource("2_crh5y")
+
+[node name="Jump" type="Node" parent="Locomotion"]
+script = ExtResource("16_jump")
+stats = ExtResource("2_crh5y")
+
+[node name="Dash" type="Node" parent="Locomotion"]
+script = ExtResource("17_dash")
+stats = ExtResource("2_crh5y")
 
 [node name="CameraFollow" type="Camera2D" parent="."]
 zoom = Vector2(1.2, 1.2)

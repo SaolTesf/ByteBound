@@ -1,9 +1,5 @@
 class_name EnemyPatrol extends EnemyState
-## PATROL STATE
-##
-## The enemy walks in its current facing direction for [member MoveStats.move_time].
-## When the timer ends it flips and patrols again, or idles; sighting the player
-## transitions to chase.
+## PATROL STATE — walks in the current facing direction; flips/idles when the timer ends.
 
 @export var idle: FSMState
 @export var patrol: FSMState
@@ -19,10 +15,8 @@ func enter() -> void:
 	setup_timer()
 	patrol_timer.start()
 
-func process_physics(delta: float) -> FSMState:
-	move_stats.handle_horizontal_input(enemy, enemy.dir, delta)
-	move_stats.handle_gravity(enemy, false, delta)
-	enemy.move_and_slide()
+func process_physics(_delta: float) -> FSMState:
+	walk.direction = enemy.dir
 	return null
 
 func process_frame(_delta: float) -> FSMState:

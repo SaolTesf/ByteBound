@@ -6,6 +6,7 @@ class_name Enemy extends BaseCharacter
 ## ([member dir], [member player_in_sight], [member player]).
 
 @export var hitbox: Hitbox
+@export var walk: WalkComponent
 
 @export_category("Field of View")
 @export var fov: FoV
@@ -19,6 +20,7 @@ var player: CharacterBody2D
 
 func _ready() -> void:
 	super._ready()
+	assert(walk, "Enemy: walk component not set")
 	fov.init(num_segments, sight_angle, sight_distance)
 	fov.sighted.connect(_on_sighted)
 	fov.lost.connect(_on_lost)

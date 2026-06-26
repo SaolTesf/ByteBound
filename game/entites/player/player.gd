@@ -8,6 +8,12 @@ class_name Player extends BaseCharacter
 @export var input: InputComponent
 @export var hand : Node
 @export var camera : Camera2D
+
+@export_group("Movement components")
+@export var walk: WalkComponent
+@export var jump: JumpComponent
+@export var dash: DashComponent
+@export var gravity: GravityComponent
 @onready var player_sprite: AnimatedSprite2D = $PlayerSprite
 @onready var explosion_sprite: AnimatedSprite2D = $ExplosionSprite
 
@@ -34,6 +40,7 @@ func _ready() -> void:
 	# Required nodes (sprite + movement_stats are asserted by BaseCharacter).
 	assert(input, "Player: input (InputComponent) not set")
 	assert(hand, "Player: hand not set")
+	assert(walk and jump and dash and gravity, "Player: movement components not wired")
 	hand.init(self)
 	# Set up the signals
 	SignalHub.key_collected.connect(_on_key_collected)
@@ -58,21 +65,17 @@ func _physics_process(delta: float) -> void:
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody2D and c.get_collider().has_method("apply_central_impulse"):
-			var push_force = (PUSH_FORCE * velocity.length() / movement_stats.get_speed(self)) + MIN_PUSH_FORCE
+			var ref_speed = movement_stats.ground_speed if is_on_floor() else movement_stats.air_speed
+			var push_force = (PUSH_FORCE * velocity.length() / ref_speed) + MIN_PUSH_FORCE
 			c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
 
 	
-
-func _process(delta: float) -> void:
-	# this is the dash timer
-	dash_cooldown_check(delta)
-
-		
 
 func _input(_event: InputEvent) -> void:
 	hand.update_direction(input)
 	update_dir()
 
+		
 
 func _on_death_timer_timeout():
 	#When timer runs out, we reload the scene
@@ -108,13 +111,6 @@ func handleDeath():
 	deathTimer.start()
 	explosion_sprite.play("explode")
 	
-
-# Timers ---------------------------------------------------------------------
-func dash_cooldown_check(delta: float):
-	if !movement_stats.is_dash_ready:
-		movement_stats.dash_cooldown_timer -= delta
-		if movement_stats.dash_cooldown_timer <= 0:
-			movement_stats.is_dash_ready = true
 
 # helpers
 func update_dir():

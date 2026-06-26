@@ -1,15 +1,11 @@
 class_name EnemyIdle extends EnemyState
-## IDLE STATE
-##
-## The enemy waits in place for [member MoveStats.idle_time], then either patrols
-## (if it can move) or idles again. Sighting the player transitions to chase.
+## IDLE STATE — waits for [member MoveStats.idle_time], then patrols/idles; chases on sight.
 
 @export var patrol: FSMState
 @export var idle: FSMState
 @export var chase: FSMState
 
 var idle_timer: Timer
-## Allows the enemy to change state once the timer ends.
 var in_idle: bool
 
 func enter() -> void:
@@ -17,7 +13,7 @@ func enter() -> void:
 	in_idle = true
 	enemy.fov.modulate = enemy.original_color
 	enemy.dir = -enemy.dir
-	enemy.velocity = Vector2.ZERO
+	walk.direction = 0.0
 	setup_timer()
 	idle_timer.start()
 
@@ -29,11 +25,6 @@ func process_frame(_delta: float) -> FSMState:
 			return idle
 	if enemy.player_in_sight:
 		return chase
-	return null
-
-func process_physics(delta: float) -> FSMState:
-	move_stats.handle_gravity(enemy, false, delta)
-	enemy.move_and_slide()
 	return null
 
 func setup_timer() -> void:

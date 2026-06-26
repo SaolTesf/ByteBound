@@ -7,11 +7,13 @@
 [ext_resource type="Script" uid="uid://eibvlqug7l7x" path="res://addons/StateMachine/scripts/state_machine_2d.gd" id="5_qi620"]
 [ext_resource type="Script" uid="uid://cd2dfpkyxciss" path="res://entites/enemy/enemy-states/idle.gd" id="6_encld"]
 [ext_resource type="Script" uid="uid://bylojrmngsi6j" path="res://entites/enemy/enemy-states/patrol.gd" id="6_la3kd"]
-[ext_resource type="PackedScene" uid="uid://yn8mnupom0tf" path="res://components/gravity/gravity_component.tscn" id="8_fifas"]
+[ext_resource type="Script" path="res://components/movement/gravity_component.gd" id="8_fifas"]
 [ext_resource type="Script" uid="uid://v1y5jdjhsde2" path="res://entites/enemy/enemy-states/chase.gd" id="8_jt8rg"]
 [ext_resource type="PackedScene" uid="uid://cq5skp1ss73rt" path="res://components/fov/fov.tscn" id="8_w3277"]
 [ext_resource type="Script" uid="uid://cmjnyuv507tq3" path="res://entites/enemy/enemy-states/look_around.gd" id="9_niyo1"]
-[ext_resource type="PackedScene" uid="uid://blbw63k24k8n6" path="res://components/animations/animation_component.tscn" id="9_volv0"]
+[ext_resource type="PackedScene" path="res://components/animations/animation_component.tscn" id="9_volv0"]
+[ext_resource type="Script" path="res://components/locomotion/locomotion_component.gd" id="10_loco"]
+[ext_resource type="Script" path="res://components/movement/walk_component.gd" id="11_walk"]
 
 [sub_resource type="Resource" id="Resource_5fr5x"]
 script = ExtResource("2_6e87y")
@@ -27,16 +29,14 @@ ground_speed = 100.0
 air_speed = 50.0
 ground_acceleration = 80.0
 air_acceleration = 20.0
-ground_decceleration = 50.0
-air_decceleratoin = 80.0
-gravity = 980.0
-fast_fall_gravity = 1500.0
+ground_deceleration = 50.0
+air_deceleration = 80.0
 jump_height = -400.0
 max_jumps = 1
 multi_jump_height_multiplier = 0.8
 coyote_jump_time = 0.5
 jump_buffer_time = 0.2
-dash_multipler = 2.0
+dash_multiplier = 2.0
 dash_duration = 2.0
 dash_cooldown = 4.0
 dash_distance = 100.0
@@ -94,7 +94,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "hitbox", "fov")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "hitbox", "fov", "walk")]
 collision_layer = 4
 collision_mask = 35
 script = ExtResource("1_jji55")
@@ -102,6 +102,7 @@ sprite = NodePath("AnimatedSprite2D")
 movement_stats = SubResource("Resource_5fr5x")
 hitbox = NodePath("Hitbox")
 fov = NodePath("FoV")
+walk = NodePath("Locomotion/Walk")
 num_segments = 20
 sight_distance = 100.0
 sight_angle = 40.0
@@ -154,7 +155,15 @@ state_name = "LookAround"
 idle_state = NodePath("../Idle")
 chase_state = NodePath("../Chase")
 
-[node name="GravityComponent" parent="." instance=ExtResource("8_fifas")]
+[node name="Locomotion" type="Node" parent="."]
+script = ExtResource("10_loco")
+
+[node name="Gravity" type="Node" parent="Locomotion"]
+script = ExtResource("8_fifas")
+
+[node name="Walk" type="Node" parent="Locomotion"]
+script = ExtResource("11_walk")
+stats = SubResource("Resource_5fr5x")
 
 [node name="AnimationComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("9_volv0")]
 sprite = NodePath("../AnimatedSprite2D")

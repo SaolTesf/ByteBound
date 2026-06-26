@@ -1,8 +1,5 @@
 class_name EnemyLookAround extends EnemyState
-## LOOK-AROUND STATE
-##
-## After losing the player the enemy flips back and forth a few times searching.
-## Sighting the player resumes chase; running out of flips returns to idle.
+## LOOK-AROUND STATE — flips in place a few times searching; chases on sight or idles.
 
 @export var idle_state: FSMState
 @export var chase_state: FSMState
@@ -14,6 +11,7 @@ var look_timer: Timer
 
 func enter() -> void:
 	super()
+	walk.direction = 0.0
 	flips_left = look_amount
 	look_timer = Timer.new()
 	look_timer.one_shot = false
