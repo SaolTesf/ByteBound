@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://byocmdiv57esl"]
 
-[ext_resource type="Script" uid="uid://bw4dt1bkc6aj5" path="res://entites/objects/buttons/pressure-plates/pressure_plate.gd" id="1_twbif"]
+[ext_resource type="Script" path="res://components/channel/channel_emitter_component.gd" id="1_twbif"]
 [ext_resource type="Texture2D" uid="uid://c6subjsrfhpdh" path="res://Assets/Objects/Buttons/RedPressurePlate/RedPressurePlate1.png" id="2_33imk"]
 [ext_resource type="Texture2D" uid="uid://dw4rkomypjg1a" path="res://Assets/Objects/Buttons/RedPressurePlate/RedPressurePlate2.png" id="3_8mqxr"]
 [ext_resource type="Texture2D" uid="uid://s1rdmt341f6t" path="res://Assets/Objects/Buttons/RedPressurePlate/RedPressurePlate3.png" id="4_ou6nt"]
@@ -58,12 +58,9 @@ gradient = SubResource("Gradient_4m4hw")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="RedPressurePlate" type="Area2D" node_paths=PackedStringArray("light")]
+[node name="RedPressurePlate" type="Area2D"]
 collision_layer = 16
 collision_mask = 2
-script = ExtResource("1_twbif")
-type = 0
-light = NodePath("PointLight2D")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -88,3 +85,11 @@ position = Vector2(0.157661, -4.5461)
 scale = Vector2(0.346334, 0.172243)
 color = Color(1, 0.50764, 0.285314, 1)
 texture = SubResource("GradientTexture2D_205l1")
+
+[node name="ChannelEmitter" type="Node" parent="." node_paths=PackedStringArray("area", "sprite", "light")]
+script = ExtResource("1_twbif")
+area = NodePath("..")
+sprite = NodePath("../AnimatedSprite2D")
+light = NodePath("../PointLight2D")
+channel = 0
+trigger_groups = Array[String](["Player", "Throwable", "Movable"])
