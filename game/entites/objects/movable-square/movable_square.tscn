@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://dveonqmfkatdx"]
+
+[ext_resource type="Script" uid="uid://codjuatd6awl2" path="res://entites/objects/movable-square/movable_square.gd" id="1_tsh1h"]
+[ext_resource type="PackedScene" uid="uid://yn8mnupom0tf" path="res://components/gravity/gravity_component.tscn" id="2_6yelg"]
+[ext_resource type="Texture2D" uid="uid://n3wh15a4gan0" path="res://Assets/Objects/MovableBox.png" id="2_io3ov"]
+[ext_resource type="PackedScene" uid="uid://t4ij3l5v76t" path="res://components/hit-box/hit_box.tscn" id="3_8ubtu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cd5u5"]
+size = Vector2(42.5, 43.3333)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uorvl"]
+size = Vector2(32, 24)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_63hv8"]
+polygon = PackedVector2Array(-13, 11, -13, -11, 13, -11, 13, 11)
+
+[node name="MovableSquare" type="CharacterBody2D" node_paths=PackedStringArray("gravity", "collision", "hitbox")]
+collision_layer = 32
+collision_mask = 3
+floor_stop_on_slope = false
+script = ExtResource("1_tsh1h")
+acceleration = null
+push_force = null
+max_push_force = null
+friction = null
+gravity_scale = null
+gravity = NodePath("GravityComponent")
+collision = NodePath("SquareCollision")
+hitbox = NodePath("HitBox")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4.76837e-07, 4.76837e-07)
+scale = Vector2(1.625, 1.625)
+texture = ExtResource("2_io3ov")
+
+[node name="GravityComponent" parent="." instance=ExtResource("2_6yelg")]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -13.0
+offset_top = -13.0
+offset_right = 13.0
+offset_bottom = 13.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+color = Color(0.349252, 0.182199, 0, 0.811765)
+
+[node name="SquareCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0.25, 1.78814e-07)
+scale = Vector2(0.6, 0.6)
+shape = SubResource("RectangleShape2D_cd5u5")
+
+[node name="HitBox" parent="." instance=ExtResource("3_8ubtu")]
+collision_layer = 32
+collision_mask = 27
+x = 45.0
+y = 28.0
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+shape = SubResource("RectangleShape2D_uorvl")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_63hv8")
+sdf_collision = false
+
+[editable path="HitBox"]

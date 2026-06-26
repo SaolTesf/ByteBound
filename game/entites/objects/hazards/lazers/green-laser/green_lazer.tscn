@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://da24un2f3vxpg"]
+
+[ext_resource type="Script" uid="uid://cv5v1rd6loa37" path="res://entites/objects/hazards/lazers/green-laser/green_lazer.gd" id="1_2eoge"]
+[ext_resource type="Texture2D" uid="uid://b0cj1ib8pslf0" path="res://Assets/Objects/Barriers/GreenBeam/Disabled/GreenBeamDisabled7.png" id="1_i5abx"]
+[ext_resource type="Texture2D" uid="uid://dpjrwqolsgert" path="res://Assets/Objects/Barriers/GreenBeam/Disabled/GreenBeamDisabled6.png" id="2_elpxy"]
+[ext_resource type="Texture2D" uid="uid://c7rc5e81m3xgo" path="res://Assets/Objects/Barriers/GreenBeam/Disabled/GreenBeamDisabled5.png" id="3_od6wv"]
+[ext_resource type="Texture2D" uid="uid://dfdxlorafjqox" path="res://Assets/Objects/Barriers/GreenBeam/Disabled/GreenBeamDisabled4.png" id="4_6pctx"]
+[ext_resource type="Texture2D" uid="uid://dtstppdu63pso" path="res://Assets/Objects/Barriers/GreenBeam/Disabled/GreenBeamDisabled3.png" id="5_l4jxf"]
+[ext_resource type="Texture2D" uid="uid://djkeci6kisjna" path="res://Assets/Objects/Barriers/GreenBeam/Disabled/GreenBeamDisabled2.png" id="6_2wrv5"]
+[ext_resource type="Texture2D" uid="uid://xklgj1ij27y8" path="res://Assets/Objects/Barriers/GreenBeam/Disabled/GreenBeamDisabled1.png" id="7_psaa0"]
+[ext_resource type="Texture2D" uid="uid://duovtorwhxt8v" path="res://Assets/Objects/Barriers/GreenBeam/Active/GreenBeamActive1.png" id="8_085xq"]
+[ext_resource type="Texture2D" uid="uid://cs387atk7l33f" path="res://Assets/Objects/Barriers/GreenBeam/Active/GreenBeamActive2.png" id="9_4cyot"]
+[ext_resource type="Texture2D" uid="uid://cbbv7b80i4776" path="res://Assets/Objects/Barriers/GreenBeam/Active/GreenBeamActive3.png" id="10_ve4dk"]
+[ext_resource type="Texture2D" uid="uid://d14ciheucjjfx" path="res://Assets/Objects/Barriers/GreenBeam/Active/GreenBeamActive4.png" id="11_ojt0b"]
+[ext_resource type="Texture2D" uid="uid://b77g76h1raoh1" path="res://Assets/Objects/Barriers/GreenBeam/Active/GreenBeamActive5.png" id="12_bgv64"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sbn3p"]
+size = Vector2(8, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f7qy1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_i5abx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_elpxy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_od6wv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6pctx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_l4jxf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_2wrv5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_psaa0")
+}],
+"loop": false,
+"name": &"Activate",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_085xq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_4cyot")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ve4dk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ojt0b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_bgv64")
+}],
+"loop": true,
+"name": &"Active",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_psaa0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_2wrv5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_l4jxf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6pctx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_od6wv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_elpxy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_i5abx")
+}],
+"loop": false,
+"name": &"Disabled",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_6p4sg"]
+offsets = PackedFloat32Array(0.118182, 0.872727)
+colors = PackedColorArray(0, 0.823529, 0.286275, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vvwv7"]
+gradient = SubResource("Gradient_6p4sg")
+fill_from = Vector2(0.5, 0)
+repeat = 2
+
+[node name="GreenLazer" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_2eoge")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_sbn3p")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_f7qy1")
+animation = &"Active"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(1.5, -0.5)
+scale = Vector2(0.328125, 0.734375)
+color = Color(0, 1, 0.388235, 1)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_vvwv7")
