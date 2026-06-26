@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://d2wvgxoutetsq" path="res://entites/player/player-states/dash.gd" id="7_i2536"]
 [ext_resource type="Script" uid="uid://b84f3r6hx040m" path="res://entites/player/player-states/fall.gd" id="7_y3686"]
 [ext_resource type="PackedScene" uid="uid://ba0doa040rdwp" path="res://components/input/input_component.tscn" id="9_yvic6"]
-[ext_resource type="Script" uid="uid://bajir4v0vh6yv" path="res://entites/player/hand.gd" id="12_48m5d"]
+[ext_resource type="Script" path="res://components/holder/holder_component.gd" id="12_48m5d"]
 [ext_resource type="Script" path="res://components/locomotion/locomotion_component.gd" id="13_loco"]
 [ext_resource type="Script" path="res://components/movement/gravity_component.gd" id="14_grav"]
 [ext_resource type="Script" path="res://components/movement/walk_component.gd" id="15_walk"]

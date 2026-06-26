@@ -6,7 +6,7 @@ class_name Player extends BaseCharacter
 ## driven by the child FSM ([FSMachine2D]).
 
 @export var input: InputComponent
-@export var hand : Node
+@export var hand : HolderComponent
 @export var camera : Camera2D
 
 @export_group("Movement components")
@@ -19,9 +19,6 @@ class_name Player extends BaseCharacter
 
 var has_key: bool = false
 var was_spoted : bool = false
-
-# Control picking up object
-var hands_free : bool = true
 
 const PUSH_FORCE: float = 15.0
 const MIN_PUSH_FORCE: float = 1.0
